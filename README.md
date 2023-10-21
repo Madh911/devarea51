@@ -15,7 +15,7 @@
 
     <p>This is a testing website where you can view and download files related to various programming topics.</p>
 
-    <h2>File 1 - Array Implementation of List ADT</h2>
+    <h2>File</h2>
 
     <pre>
 Array Implementation of List ADT
@@ -327,6 +327,8 @@ default:
 }
 goto A;
 }
+>
+>
 Output
 1.Create
 2.Insert
@@ -1275,6 +1277,3 @@ if(tmp!=NULL){
 printf(%d->,tmp->data); 
 preorder(tmp->llink); preorder(tmp->rlink);
 }}
-
-</body>
-</html>
