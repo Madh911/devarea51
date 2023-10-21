@@ -72,7 +72,7 @@
                 <a href="#" onclick="openModal('File 1.pdf', 'This is the content of File 1.pdf')">File 1.pdf</a>
             </li>
             <li>
-                <a href="#" onclick="openModal('File 2.doc', 'This is the content of File 2.doc')">File 2.doc</a>
+                <a href="#" onclick="openModal('https://docs.google.com/document/d/15TvmAx8jOffFWMQK2M8_8hG7e7L8-I7M/edit?usp=share_link&ouid=108958775281637365779&rtpof=true&sd=true', 'This is the content of File 2.doc')">File 2.doc</a>
             </li>
             <li>
                 <a href="#" onclick="openModal('File 3.jpg', 'This is the content of File 3.jpg')">File 3.jpg</a>
