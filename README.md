@@ -4,7 +4,7 @@
     <style>
         body {
             background-color: #000;
-            color: #fff;
+            color: #0f0;
             font-family: Arial, sans-serif;
             margin: 20px;
         }
