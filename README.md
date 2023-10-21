@@ -68,11 +68,1272 @@
         <h2>Available Files:</h2>
         <ul class="file-list">
             <li>
-                <a href="#" onclick="openModal('File 1.pdf', 'This is the content of File 1.pdf')">File 1.pdf</a>
+                <a href="#" onclick="openModal('https://drive.google.com/file/d/1J1kWIT-DPbg_0hCIcV4ZQvtbNNY4dDEo/view?usp=share_link', 'This is the content of the pdf file 
+Array Implementation of List ADT
+
+“array.h” File:
+#include<stdio.h>
+#include<alloc.h>
+#include<conio.h>
+struct list
+{
+int capacity;
+int size;
+int *array;
+};
+typedef struct list *ptrToNode;
+typedef ptrToNode LIST;
+typedef int POSITION;
+int Isempty(LIST L)
+{
+return L->size==0;
+}
+void MakeEmpty(LIST L)
+{
+if(Isempty(L))
+ printf("\n LIST is already Empty");
+else
+ {
+ L->size=0;
+ printf("\n Now List becomes Empty");
+ }
+}
+LIST Createlist(int max)
+{
+LIST L;
+L=(struct list*)malloc(sizeof(struct list));
+if(L==NULL)
+ printf("\n Fatal Error");
+else
+{
+ L->capacity=max;
+ L->array=(int*)malloc(sizeof(int)*max);
+ if(L->array==NULL)
+ printf("\n Fatal Error");
+ else
+{
+ 
+L
+->size=0
+;
+ printf("
+\n List is Created successfully")
+;
+}
+}
+return L
+;
+}
+int Isfull(LIST L
+)
+{
+return L
+->size==
+L
+->capacity
+;
+}
+void Insert(int x,LIST L,POSITION P
+)
+{
+int i
+;
+if(Isfull(L)
+)
+ printf("
+\n List is Full")
+;
+els
+e
+ 
+{
+ for(i=L
+->size
+-1;i>=P;i--
+)
+ 
+L
+-
+>arra
+y[i+1]=L
+-
+>arra
+y[i]
+;
+ 
+L
+->size++
+;
+ 
+L
+-
+>arra
+y[P]=x
+;
+ 
+}
+}
+POSITION Findprevious(int x,LIST L
+)
+{
+POSITION P
+;
+P=
+-
+1
+;
+while(P!=L
+->size&&L
+-
+>arra
+y[P+1]!=x
+)
+{
+ P++
+;
+}
+return P
+;
+}
+POSITION Find(int x,LIST L
+)
+{
+POSITION P
+;
+P=0
+;
+while(P!=L
+->size&&L
+-
+>arra
+y[P]!=x
+)
+{
+ P++
+;
+}
+return P
+;
+}
+void Delete(int x,LIST L)
+{
+int i;
+POSITION P;
+P=Find(x,L);
+if(P==L->size)
+ printf("\n Element not found in the list");
+else
+ {
+ for(i=P;i<L->size;i++)
+ L->array[i]=L->array[i+1];
+ L->size--;
+ }
+}
+LIST Deletelist(LIST L)
+{
+MakeEmpty(L);
+free(L);
+L=NULL;
+return L;
+}
+void Display(LIST L)
+{
+int i;
+for(i=0;i<L->size;i++)
+printf("\n %d",L->array[i]);
+}
+“array.c” File:
+#include"array.h"
+#include<stdlib.h>
+void main()
+{
+LIST L=NULL;
+POSITION P;
+int a,choice,ch,element;
+clrscr();
+printf("\n\n1.Create\n2.Insert\n3.Delete\n4.Display\n5.MakeEmpty\n6.Find\n7.IsEmpty\n8.IsFul
+l\n9.Deletelist\n10.Exit\n");
+A:
+printf("\n Enter Ur Option:\t");
+scanf("%d",&choice);
+switch(choice)
+{
+case 1:
+ if(L==NULL)
+ L=Createlist(5);
+ else
+ printf("\nList is already created");
+ break;
+case 2:
+ if(L==NULL)
+ printf("\nList is not yet created");
+ else
+ {
+ printf("\nEnter the Element to insert:\t");
+ scanf("%d",&element);
+ if(L->size==0)
+ Insert(element,L,0);
+ else
+ {
+ printf("\n where u want to insert?\t1:Front\t2:Back\t3:middle\t::: ");
+ scanf("%d",&ch);
+ if(ch==1)
+ Insert(element,L,0);
+ else
+ if(ch==2)
+ Insert(element,L,L->size);
+ else
+ if(ch==3)
+ {
+ printf("\nWhere you want to insert:\t");
+ scanf("%d",&a);
+ P=Find(a,L);
+ if(P<L->size)
+ Insert(element,L,P);
+ else
+ printf("\nElement is not in the list");
+ }
+ else
+ printf("\n Ur choice is not available");
+ }
+ }
+ break;
+case 3:
+ if(L==NULL)
+ printf("\nList is not yet created");
+ if(Isempty(L))
+ printf("\nList is empty");
+ else
+ {
+ printf("\nEnter the element to delete:\t");
+ scanf("%d",&a);
+ Delete(a,L);
+ }
+ break;
+case 4:
+ if(L==NULL)
+ printf("\nList is not yet created");
+ else
+ if(Isempty(L))
+ printf("\nList is empty");
+ else
+ {
+ printf("\nElements present in the list are:");
+ Display(L);
+ }
+ break;
+case 5:
+ if(L==NULL)
+ printf("\n List is not yet created ");
+ else
+ MakeEmpty(L);
+ break;
+case 6:
+ if(L==NULL)
+ printf("\n Not yet created");
+ else
+ if(Isempty(L))
+ printf("\n List is empty");
+ else
+ {
+ printf("\n which element is to find:\t");
+ scanf("%d",&a);
+ P=Find(a,L);
+ printf("\n Element is at %d\t[0 to 4 means present]\t[5 means not present]",P);
+ }
+ break;
+case 7:
+ if(L==NULL)
+ printf("\n Not yet created");
+ else
+ if(Isempty(L))
+ printf("\n List is empty");
+ else
+ printf("\n List is not empty");
+ break;
+case 8:
+ if(L==NULL)
+ printf("\n Not yet created");
+ else
+ if(Isfull(L))
+ printf("\n List is FULL");
+ else
+ printf("\n List is not FULL");
+ break;
+case 9:
+ if(L==NULL)
+ printf("\n Not yet created");
+ else
+ {
+ L=Deletelist(L);
+ printf("\n List is Deleted");
+ }
+ break;
+case 10:
+ exit (0);
+ break;
+default:
+ printf("\n\n *******WRONG ENTRY*******");
+ break;
+}
+goto A;
+}
+Output
+1.Create
+2.Insert
+3.Delete
+4.Display
+5.MakeEmpty
+6.Find
+7.IsEmpty
+8.IsFull
+9.Deletelist
+10.Exit
+Enter Ur Option: 1
+List is created successfully
+Enter Ur Option: 2
+Enter the element to insert: 300
+Enter Ur Option: 2
+Enter the element to insert: 100
+Where U want to insert? 1.Front 2.Back 3.Middle ::::: 1
+Enter Ur Option: 2
+Enter the element to insert: 200
+Where U want to insert? 1.Front 2.Back 3.Middle ::::: 3
+Enter Ur Option: 2
+Enter the element to insert: 400
+Where U want to insert? 1.Front 2.Back 3.Middle ::::: 2
+Enter Ur Option: 2
+Enter the element to insert: 500
+Where U want to insert? 1.Front 2.Back 3.Middle ::::: 2
+Enter Ur Option: 2
+Enter the element to insert: 600
+Where U want to insert? 1.Front 2.Back 3.Middle ::::: 1
+List is Full
+Enter Ur Option: 4
+Elements present in the list are
+100
+200
+300
+400
+500
+Enter Ur Option: 7
+List is not empty
+Enter Ur Option: 6
+Which element is to find: 500
+Element at 4 [0 to 4 – present] [5 – not present]
+Enter Ur Option: 3
+Enter the element to delete: 300
+Enter Ur Option: 4
+Elements present in the list are:
+100
+200
+400
+500
+Enter Ur Option: 8
+List is not Full
+Enter Ur Option: 5
+Now List becomes Empty
+Enter Ur Option: 9
+List is Deleted
+Enter Ur Option: 2
+List is not yet created
+Enter Ur Option: 12
+*******WRONG ENTRY*******
+Enter Ur Option: 10
+Program without pointer
+#include<stdio.h>
+#include<conio.h>
+#define MAX 10
+void create();
+void insert();
+void deletion();
+void search();
+void display();
+int a,b[20], n, p, e, f, i, pos;
+void main()
+{
+//clrscr();
+int ch;
+char g='y';
+do
+{
+printf("\n main Menu");
+printf("\n 1.Create \n 2.Delete \n 3.Search \n 4.Insert \n 5.Display\n 6.Exit \n");
+printf("\n Enter your Choice");
+scanf("%d", &ch);
+switch(ch)
+{
+case 1:
+create();
+break;
+case 2:
+deletion();
+break;
+case 3:
+search();
+break;
+case 4:
+insert();
+break;
+case 5:
+display();
+break;
+case 6:
+exit();
+break;
+default:
+printf("\n Enter the correct choice:");
+}
+printf("\n Do u want to continue:::");
+scanf("\n%c", &g);
+}
+while(g=='y'||g=='Y');
+getch();
+}
+void create()
+{
+printf("\n Enter the number of nodes");
+scanf("%d", &n);
+for(i=0;i<n;i++)
+{
+printf("\n Enter the Element:",i+1);
+scanf("%d", &b[i]);
+}
+}
+void deletion()
+{
+printf("\n Enter the position u want to delete::");
+scanf("%d", &pos);
+if(pos>=n)
+{
+printf("\n Invalid Location::");
+}
+else
+{
+for(i=pos+1;i<n;i++)
+{
+b[i-1]=b[i];
+}
+n--;
+}
+printf("\n The Elements after deletion");
+for(i=0;i<n;i++)
+{
+printf("\t%d", b[i]);
+}
+}
+void search()
+{
+printf("\n Enter the Element to be searched:");
+scanf("%d", &e);
+for(i=0;i<n;i++)
+{
+if(b[i]==e)
+{
+printf("Value is in the %d Position", i);
+}
+else
+{
+printf("Value %d is not in the list::", e);
+continue;
+}
+}
+}
+void insert()
+{
+printf("\n Enter the position u need to insert::");
+scanf("%d", &pos);
+if(pos>=n)
+{
+printf("\n invalid Location::");
+}
+else
+{
+for(i=MAX-1;i>=pos-1;i--)
+{
+b[i+1]=b[i];
+}
+printf("\n Enter the element to insert::\n");
+scanf("%d",&p);
+b[pos]=p;
+n++;
+}
+printf("\n The list after insertion::\n");
+display();
+}
+void display()
+{
+printf("\n The Elements of The list ADT are:");
+for(i=0;i<n;i++)
+{
+printf("\n\n%d", b[i]);
+}
+}
+
+
+Array Implementation of Stack ADT
+
+
+Program
+#include<stdio.h>
+int stack[100],choice,n,top,x,i;
+void push(void);
+void pop(void);
+void display(void);
+int main()
+{
+ //clrscr();
+ top=-1;
+ printf("\n Enter the size of STACK[MAX=100]:");
+ scanf("%d",&n);
+ printf("\n\t STACK OPERATIONS USING ARRAY");
+ printf("\n\t--------------------------------");
+ printf("\n\t 1.PUSH\n\t 2.POP\n\t 3.DISPLAY\n\t 4.EXIT");
+ do
+ {
+ printf("\n Enter the Choice:");
+ scanf("%d",&choice);
+ switch(choice)
+ {
+ case 1:
+ {
+ push();
+ break;
+ }
+ case 2:
+ {
+ pop();
+ break;
+ }
+ case 3:
+ {
+ display();
+ break;
+ }
+ case 4:
+ {
+ printf("\n\t EXIT POINT ");
+ break;
+ }
+ default:
+ {
+ printf ("\n\t Please Enter a Valid Choice(1/2/3/4)");
+ }
+ 
+ }
+ }
+ while(choice!=4);
+ return 0;
+}
+void push()
+{
+ if(top>=n-1)
+ {
+ printf("\n\tSTACK is over flow");
+ }
+ else
+ {
+ printf(" Enter a value to be pushed:");
+ scanf("%d",&x);
+ top++;
+ stack[top]=x;
+ }
+}
+void pop()
+{
+ if(top<=-1)
+ {
+ printf("\n\t Stack is under flow");
+ }
+ else
+ {
+ printf("\n\t The popped elements is %d",stack[top]);
+ top--;
+ }
+}
+void display()
+{
+ if(top>=0)
+ {
+ printf("\n The elements in STACK \n");
+ for(i=top; i>=0; i--)
+ printf("\n%d",stack[i]);
+ printf("\n Press Next Choice");
+ }
+ else
+ {
+ printf("\n The STACK is empty");
+ }
+ 
+}
+Output
+Enter the size of STACK[MAX=100]:10
+ STACK OPERATIONS USING ARRAY
+ --------------------------------
+ 1.PUSH
+ 2.POP
+ 3.DISPLAY
+ 4.EXIT
+Enter the Choice:1
+Enter a value to be pushed:12
+Enter the Choice:1
+Enter a value to be pushed:24
+Enter the Choice:1
+Enter a value to be pushed:98
+Enter the Choice:3
+The elements in STACK
+98
+24
+12
+Press Next Choice
+Enter the Choice:2
+ The popped elements is 98
+Enter the Choice:3
+The elements in STACK
+24
+12
+Press Next Choice
+Enter the Choice:4
+
+
+Array Implementation of Queue ADT
+
+
+
+Program
+#include<stdio.h>
+#include<conio.h>
+#define SIZE 10
+void enQueue(int);
+void deQueue();
+void display();
+int queue[SIZE], front = -1, rear = -1;
+void main()
+{
+ int value, choice;
+ clrscr();
+ while(1){
+ printf("\n\n***** MENU *****\n");
+ printf("1. Insertion\n2. Deletion\n3. Display\n4. Exit");
+ printf("\nEnter your choice: ");
+ scanf("%d",&choice);
+ switch(choice){
+case 1: printf("Enter the value to be insert: ");
+scanf("%d",&value);
+enQueue(value);
+break;
+case 2: deQueue();
+break;
+case 3: display();
+break;
+case 4: exit(0);
+default: printf("\nWrong selection!!! Try again!!!");
+ } } }
+void enQueue(int value){
+ if(rear == SIZE-1)
+ printf("\nQueue is Full!!! Insertion is not possible!!!");
+ else{
+ if(front == -1)
+front = 0;
+ rear++;
+ queue[rear] = value;
+ printf("\nInsertion success!!!");
+ }}
+void deQueue(){
+ if(front == rear)
+ printf("\nQueue is Empty!!! Deletion is not possible!!!");
+ else{
+ printf("\nDeleted : %d", queue[front]);
+ front++;
+ if(front == rear)
+front = rear = -1;
+ }}
+void display(){
+ if(rear == -1)
+ printf("\nQueue is Empty!!!");
+ else{
+ int i;
+ printf("\nQueue elements are:\n");
+ for(i=front; i<=rear; i++)
+ printf("%d\t",queue[i]);
+ }}
+
+
+
+Application of Stack and Queue ADT - Evaluation of Suffix expression
+
+
+
+Program
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+int i, top = -1;
+int op1, op2, res, s[20];
+char postfix[90], symb;
+void push (int item)
+{
+ top = top+1;
+ s[top] = item;
+}
+int pop ()
+{
+ int item;
+ item = s[top];
+ top = top-1;
+ return item;
+}
+void main()
+{
+ printf("\nEnter a valid postfix expression:\n");
+ scanf("%s", postfix);
+ for(i=0; postfix[i]!='\0'; i++)
+ {
+ symb = postfix[i];
+ if(isdigit(symb))
+ {
+ push(symb - '0');
+ }
+ else
+ {
+ op2 = pop();
+ op1 = pop();
+ switch(symb)
+ {
+ case '+': push(op1+op2);
+ break;
+ case '-': push(op1-op2);
+ break;
+ case '*': push(op1*op2);
+ break;
+ case '/': push(op1/op2);
+ break;
+ case '%': push(op1%op2);
+ break;
+ case '$':
+ case '^': push(pow(op1, op2));
+ break;
+ default : push(0);
+ }
+ }
+ }
+ res = pop();
+ printf("\n Result = %d", res);
+}
+Output
+Enter a valid postfix expression:
+623+-382/+*2$3+
+Result = 52
+Enter a valid postfix expression:
+42$3*3-84/11+/+
+Result = 46
+
+
+
+
+Application of Stack and Queue ADT - Balancing Parenthesis
+
+
+Program
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<conio.h>
+#define MAX 30
+int top=-1;
+int stack[MAX];
+void push(char);
+char pop();
+int match(char a,char b);
+int check(char []);
+int main()
+{
+char exp[MAX];
+int valid;
+clrscr();
+printf("Enter an algebraic expression : ");
+gets(exp);
+valid=check(exp);
+if(valid==1)
+printf("Valid expression\n");
+else
+printf("Invalid expression\n");
+getch();
+return 0;
+}
+int check(char exp[] )
+{
+int i;
+char temp;
+ for(i=0;i<strlen(exp);i++)
+ {
+ if(exp[i]=='(' || exp[i]=='{' || exp[i]=='[')
+ push(exp[i]);
+ if(exp[i]==')' || exp[i]=='}' || exp[i]==']')
+ if(top==-1) /*stack empty*/
+ {
+ printf("Right parentheses are more than left parentheses\n");
+ return 0;
+ }
+ else
+ {
+ temp=pop();
+ if(!match(temp, exp[i]))
+ {
+ printf("Mismatched parentheses are : ");
+ printf("%c and %c\n",temp,exp[i]);
+ return 0;
+ }
+ }
+ }
+ if(top==-1) /*stack empty*/
+ {
+ printf("Balanced Parentheses\n");
+ return 1;
+ }
+ else
+ {
+ printf("Left parentheses more than right parentheses\n");
+ return 0;
+ }
+}/*End of main()*/
+int match(char a,char b)
+{
+ if(a=='[' && b==']')
+ return 1;
+ if(a=='{' && b=='}')
+ return 1;
+ if(a=='(' && b==')')
+ return 1;
+ return 0;
+}/*End of match()*/
+void push(char item)
+{
+ if(top==(MAX-1))
+ {
+ printf("Stack Overflow\n");
+ return;
+ }
+ top=top+1;
+ stack[top]=item;
+}/*End of push()*/
+char pop()
+{
+ if(top==-1)
+ {
+ printf("Stack Underflow\n");
+ exit(1);
+ }
+ return(stack[top--]);
+}/*End of pop()*/
+Output 
+Enter an algebraic expression: (((5+7)*6)/2)
+Balanced Parentheses
+Valid expression
+
+
+Application of Stack and Queue ADT - Tower of Hanoi problem with 
+n disks
+
+
+Program
+#include<stdio.h>
+#include<conio.h>
+void towerOfHanoi(int n, char from_rod, char to_rod, char aux_rod)
+{
+if (n == 1)
+{
+printf("\n Move disk 1 from rod %c to rod %c", from_rod, to_rod);
+return;
+}
+towerOfHanoi(n-1, from_rod, aux_rod, to_rod);
+printf("\n Move disk %d from rod %c to rod %c", n, from_rod, to_rod);
+towerOfHanoi(n-1, aux_rod, to_rod, from_rod);
+}
+ int main()
+{
+int n = 4; // Number of disks
+ clrscr();
+towerOfHanoi(n, 'A', 'C', 'B'); // A, B and C are names of rods
+getch();
+ return 0;
+}
+Output
+Move disk 1 from rod A to rod B
+Move disk 2 from rod A to rod C
+Move disk 1 from rod B to rod C
+Move disk 3 from rod A to rod B
+Move disk 1 from rod C to rod A
+Move disk 2 from rod C to rod B
+Move disk 1 from rod A to rod B
+Move disk 4 from rod A to rod C
+Move disk 1 from rod B to rod C
+Move disk 2 from rod B to rod A
+Move disk 1 from rod C to rod A
+Move disk 3 from rod B to rod C
+Move disk 1 from rod A to rod B
+Move disk 2 from rod A to rod C
+Move disk 1 from rod B to rod C
+
+
+
+
+
+Application of Stack and Queue ADT – Producer and consumer Problem
+
+
+Program
+LIFO
+#include<stdio.h>
+#include<stdlib.h>
+int mutex=1,full=0,empty=3,x=0;
+int main()
+{
+ int n;
+ void producer();
+ void consumer();
+ int wait(int);
+ int signal(int);
+ printf("\n1.Producer\n2.Consumer\n3.Exit");
+ while(1)
+ {
+ printf("\nEnter your choice:");
+ scanf("%d",&n);
+ switch(n)
+ {
+ case 1: if((mutex==1)&&(empty!=0))
+ producer();
+ else
+ printf("Buffer is full!!");
+ break;
+ case 2: if((mutex==1)&&(full!=0))
+ consumer();
+ else
+ printf("Buffer is empty!!");
+ break;
+ case 3:
+ exit(0);
+ break;
+ }
+ }
+ return 0;
+
+}
+int wait(int s)
+{
+ return (--s);
+}
+int signal(int s)
+{
+ return(++s);
+}
+void producer()
+{
+ mutex=wait(mutex);
+ full=signal(full);
+ empty=wait(empty);
+ x++;
+ printf("\nProducer produces the item %d",x);
+ mutex=signal(mutex);
+}
+void consumer()
+{
+ mutex=wait(mutex);
+ full=wait(full);
+ empty=signal(empty);
+ printf("\nConsumer consumes item %d",x);
+ x--;
+ mutex=signal(mutex);
+}
+
+
+
+Binary Search Tree – Insertion and Deletion Operation
+
+
+
+
+Program
+#include<stdio.h> 
+#include<conio.h> 
+#include<process.h> 
+#include<alloc.h>
+struct tree
+{
+int data;
+struct tree *lchild;
+struct tree *rchild;
+}*t,*temp;
+int element;
+void inorder(struct tree *);
+struct tree * create(struct tree *, int); 
+struct tree * find(struct tree *, int); 
+struct tree * insert(struct tree *, int); 
+struct tree * del(struct tree *, int); 
+void main()
+{
+int ch;
+do
+{
+printf("\n\t\t\tBINARY SEARCH TREE"); 
+printf("\n\t\t\t****** ****** ****"); 
+printf("\nMain Menu\n");
+printf("\n1.Create\n2.Insert\n3.Delete\n4.Find\n5.Exit\n");
+printf("\nEnter ur choice :"); 
+scanf("%d",&ch); 
+switch(ch)
+{
+case 1:
+printf("\nEnter the data:"); 
+scanf("%d",&element); 
+t=create(t,element); 
+inorder(t);
+break;
+case2:
+printf("\nEnter the data:"); 
+scanf("%d",&element); 
+t=insert(t,element); 
+inorder(t);
+break;
+case3:
+printf("\nEnter the data:"); 
+scanf("%d",&element); 
+t=del(t,element); 
+inorder(t);
+break;
+case4:
+printf("\nEnter the data:"); 
+scanf("%d",&element); 
+temp=find(t,element); 
+if(temp->data==element)
+printf("\nElement %d is at %d",element,temp);
+else
+printf("\nElement is not found");
+break;
+case 5:
+exit(0);
+}
+}while(ch<=5);
+}
+struct tree * create(struct tree *t, int element)
+{
+t=(struct tree *)malloc(sizeof(structtree)); 
+t->data=element;
+t->lchild=NULL; 
+t->rchild=NULL; 
+return t;
+}
+struct tree * find(struct tree *t, int element)
+{
+if(t==NULL)
+return NULL; 
+if(element<t->data)
+return(find(t->lchild,element));
+else
+if(element>t->data)
+return(find(t->rchild,element));
+else
+return t;
+}
+struct tree *insert(struct tree *t,int element)
+{
+if(t==NULL)
+{
+t=(struct tree *)malloc(sizeof(struct tree)); 
+t->data=element;
+t->lchild=NULL; 
+t->rchild=NULL; 
+return t;
+}
+else
+{
+if(element<t->data)
+{
+t->lchild=insert(t->lchild,element);
+}
+elseif(element>t->data)
+{
+t->rchild=insert(t->rchild,element);
+}
+elseif(element==t->data)
+{
+printf("element already present\n");
+}
+return t;
+}
+}
+struct tree * del(struct tree *t, int element)
+{
+if(t==NULL)
+printf("element not found\n");
+elseif(element<t->data)
+t->lchild=del(t->lchild,element);
+elseif(element>t->data)
+t->rchild=del(t->rchild,element);
+elseif(t->lchild&&t->rchild)
+{
+temp=findmin(t->rchild); 
+t->data=temp->data;
+t->rchild=del(t->rchild,t->data);
+}
+else
+{
+temp=t;
+if(t->lchild==NULL)
+t=t->rchild;
+else
+if(t->rchild==NULL)
+t=t->lchild; 
+free(temp);
+}
+return t;
+}
+void inorder(struct tree *t)
+{
+if(t==NULL)
+return;
+else
+{
+inorder(t->lchild); 
+printf("\t%d",t->data); 
+inorder(t->rchild);
+}
+}
+
+
+Binary Search Tree – Tree Traversal 
+(pre-order, in-order, and post-order)
+
+
+
+
+Program
+#include<stdio.h>
+#include<conio.h>
+struct node
+{
+int data;
+struct node *rlink; 
+struct node *llink;
+}*tmp=NULL;
+typedef struct node NODE; 
+NODE *create();
+void preorder(NODE *); 
+void inorder(NODE *);
+void postorder(NODE *); 
+void insert(NODE *); 
+void main()
+{
+int n,i,m;
+clrscr(); 
+do
+{
+printf(\n\n0.create\n\n1.insert \n\n2.preorder\n\n3.postorder\n\n4.inorder\n\n5.exit\n\n); 
+printf(\n\nEnter ur choice);
+scanf(“%d”,&m); 
+switch(m)
+{
+case 0:
+tmp=create(); 
+break;
+case 1:
+insert(tmp); 
+break;
+case 2:
+printf(\n\nDisplay tree in Preorder traversal\n\n); 
+
+preorder(tmp);
+break; 
+case 3:
+printf(\n\nDisplay Tree in Postorder\n\n); 
+postorder(tmp);
+break; 
+case 4:
+printf(\n\nInorder\n\n); 
+inorder(tmp);
+break; 
+case5:
+exit(0);
+}
+}
+while(n!=5);
+getch();
+}
+void insert(NODE *root)
+{
+NODE *newnode; 
+if(root==NULL)
+{
+newnode=create(); 
+root=newnode;
+}
+else
+{
+newnode=create(); 
+while(1)
+
+{
+if(newnode->data<root->data)
+{
+if(root->llink==NULL)
+{
+root->llink=newnode; 
+Break;
+}root=root->llink;
+}if(newnode-ot->data>root->data)
+{
+if(root->rlink==NULL)
+{
+root->rlink=newnode; 
+break;
+}
+root=root->rlink;
+}
+}
+}
+}
+NODE *create()
+{
+NODE *newnode; 
+int n;
+newnode=(NODE*)malloc(sizeof(NODE)); 
+printf(\n\nEnter the Data ); 
+scanf(%d,&n);
+newnode->data=n; newnode->llink=NULL; 
+newnode->rlink=NULL; 
+
+return(newnode);
+}
+void postorder(NODE *tmp)
+{
+if(tmp!=NULL)
+{
+postorder(tmp->llink);
+postorder(tmp->rlink); 
+printf(%d->,tmp->data);
+}}
+void inorder(NODE *tmp)
+{
+If (tmp!=NULL)
+{
+inorder(tmp->llink); 
+printf(%d->,tmp->data); 
+inorder(tmp->rlink);
+}}
+void preorder(NODE *tmp)
+{
+if(tmp!=NULL){
+printf(%d->,tmp->data); 
+preorder(tmp->llink); preorder(tmp->rlink);
+}}
+
+
+
+')">File 1.pdf</a>
             </li>
             <li>
                 <a href="#" onclick="openModal('https://docs.google.com/document/d/15TvmAx8jOffFWMQK2M8_8hG7e7L8-I7M/edit?usp=share_link&ouid=108958775281637365779&rtpof=true&sd=true', 'This is the content of File 2.doc')">File 2.doc</a>
-                <p>Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 1 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 SNS COLLEGE OF TECHNOLOGY (An Autonomous Institution) Affiliated to Anna University , COIMBATORE-35 Department of Information Technology &amp; Artificial Intelligence and Machine Learning 19ITP201 &ndash; Data Structures Laboratory Academic Year 2022-2023 Even Semester USER LAB MANUAL NAME : REGISTER NO : DEGREE : BRANCH : SEMESTER : Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 2 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 Table of Content S.No Date Experiment Name Marks obtained Page No Sign 1 Array Implementation of List ADT 2 Array implementation of Stack ADT 3 Array implementation of Queue ADT Application of Stack and Queue ADT 3 a Evaluation of Suffix expression 3 b Balancing Parenthesis 3 c Tower of Hanoi problem with n disks 3 d Producer and consumer Problem Binary Search Tree 4 a Insertion, Deletion operation 4 b Tree Traversal 4 c Finding Min Element and Max Element Binary Heap and Graph 5 a Construct max heap to perform insertion and delete operations. 5 b Construct min heap to perform insertion and delete operations. 6 Dijkstra&apos;s algorithm 7 Prim&apos;s algorithm 8 Hashing Technique Searching an element 9 a Linear Search 9 b Binary Search Sorting methods to arrange a list of integers in ascending order 10 a Insertion Sort 10 b Bubble Sort 11 Heap Sort 12 a Quick Sort 12 b Merge Sort Real Time Problems 13 14 15 16 Content Beyond Syllabus &ndash; Singly Linked List Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 3 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 19ITP201 DATA STRUCTURES LABORATORY L T P J C [Common to CSE &amp; IT] 0 0 2 0 1 LIST OF EXPERIMENTS 1.1. Array implementation of List ADT. 2. Array implementation of Stack and Queue ADTs. 3. Application of Stack ADT and Queue ADT. Suggested Experiments: &bull; Evaluation of Suffix expression with single digit operands and operators: +, -, *, /, %, ^ &bull; Balancing Parenthesis &bull; Solving Tower of Hanoi problem with n disks &bull; Producer Consumer problem &bull; Reader writer problem 4. Implement the following in Binary Search Tree &bull; Insertion, Deletion &bull; Finding Min Element and Max Element &bull; Produce its pre-order, in-order, and post-order traversals 5. Implement a program to construct min or max heap to perform insertion and delete operations. 6. Implement a program to find shortest path in graph using Dijkstra&apos;s algorithm 7. Implement a program to find minimum cost spanning tree in graph using prim&apos;s algorithm 8. Implement a program to perform all the functions of a dictionary (ADT) using hashing 9. Implement a program for searching an element using Linear and Binary search. 10. Implement the following sorting methods to arrange a list of integers in ascending order: &bull; Insertion sort &bull;Bubble sort 11. Implement Heap sort algorithm for sorting a given list of integers in ascending order. 12. Implement the following sorting methods to arrange a list of integers in ascending order: &bull;Quick sort &bull;Merge sort Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 4 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 13. Banks often record transactions on an account, in order of the times of the transactions, but many people like to receive their bank statements with cheques listed in order by cheque number. People usually write(use) cheques in order by cheque number, and merchants usually cash them with reasonable dispatch. Thus few cheque numbers are usually out of order. Use an appropriate sorting algorithm for converting time of transaction ordering to cheque number ordering. Formulate the problem and write a C program to solve the problem by using appropriate data structures and algorithms. &ndash; Insertion Sort 14. A spell checker is a program that looks at a document and compares each word in the document to words stored in a dictionary. If it finds words in the dictionary, it moves on to the next word, If it does not find the word, it reports the user about the misspelled(possibly) word. Formulate the problem and write a C program to solve the problem by using appropriate data structures and algorithms. 15. A file manager identifies each file using an inode-no. A directory is also a file identified by an inode-no. Directory is a list of files each represented by an inode-no. The list has the header containing the inode-no of the parent that is the directory itself. A separate table indexed by inode-no maintains attributes of files including the name of the file. Formulate the problem and write a C program to solve the problem by using appropriate data structures and algorithms. MAJOR EQUIPMENTS / SOFTWARE REQUIRED Hardware ▪ LAN System with 33 nodes (OR) Standalone PCs &ndash; 33 Nos. ▪ Printers &ndash; 3 Nos. Software ▪ OS &ndash; Windows / UNIX Clone ▪ Compiler &ndash; C L :0 T: 0 P: 30 J: 0 Total:30 PERIODS COURSE OUTCOMES At the end of the course student should be able to: CO1 Design algorithms and employ appropriate advanced data structures for solving Problems efficiently CO2 Understand various data structure such as stacks, queues, trees, graphs, etc CO3 Implement various hashing techniques to avoid collision CO4 Implement various kinds of searching and sorting techniques, and know when to choose which technique CO5 Construct a suitable data structure and algorithm to solve a real-world problem Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 5 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 Aim To write a C program to implement list ADT using Array. Theory A list is a sequential data structure, ie. a collection of items accessible one after another beginning at the head and ending at the tail. It is a widely used data structure for applications which do not need random access Addition and removals can be made at any position in the list lists are normally in the form of a1, a2, a3.....an. The size of this list is n. The first element of the list is a1, and the last element is an. The position of element ai in a list is i. List of size 0 is called as null list. Algorithm Step 1: Create nodes first, last; next, prev and cur then set the value as NULL. Step 2: Read the list operation type. Step 3: If operation type is create, then process the following steps. &bull; Allocate memory for node cur. &bull; Read data in cur&rsquo;s data area. &bull; Assign cur node as NULL. &bull; Assign first=last=cur. Step 4: If operation type is Insert then process the following steps. &bull; Allocate memory for node cur. &bull; Read data in cur&rsquo;s data area. &bull; Read the position the Data to be insert. &bull; Availability of the position is true then assign cur&rsquo;s node as first and first = cur. &bull; If availability of position is false then do following steps. o Assign next as cur and count as zero. Ex.No: 01 Array Implementation of List ADT Date : Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 6 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 o Repeat the following steps until count less than position. ▪ Assign prev as next ▪ Next as prev of node. ▪ Add count by one. ▪ If prev as NULL then display the message INVALID POSITION. ▪ If prev not qual to NULL then do the following steps. ✓ Assign cur&rsquo;s node as prev&rsquo;s node. ✓ Assign prev&rsquo;s node as cur. Step5: If operation type is delete then do the following steps. &bull; Read the position. &bull; Check list is Empty. If it is true display the message List empty. &bull; If position is first. o Assign cur as first. o Assign First as first of node. o Reallocate the cur from memory. o If position is last. ▪ Move the current node to prev. ▪ cur&rsquo;s node as Null. ▪ Reallocate the Last from memory. ▪ Assign last as cur. o If position is enter Middle ▪ Move the cur to required position. ▪ Move the Previous to cur&rsquo;s previous position ▪ Move the Next to cur&rsquo;s Next position. ▪ Now Assign previous of node as next. ▪ Reallocate the cur from memory. Step 6: If operation is traverse. &bull; Assign current as first. &bull; Repeat the following steps until cur becomes NULL Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 7 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 Program with pointer &ldquo;array.h&rdquo; File: #include #include #include struct list { int capacity; int size; int *array; }; typedef struct list *ptrToNode; typedef ptrToNode LIST; typedef int POSITION; int Isempty(LIST L) { return L-&gt;size==0; } void MakeEmpty(LIST L) { if(Isempty(L)) printf(&quot;\n LIST is already Empty&quot;); else { L-&gt;size=0; printf(&quot;\n Now List becomes Empty&quot;); } } LIST Createlist(int max) { LIST L; L=(struct list*)malloc(sizeof(struct list)); if(L==NULL) printf(&quot;\n Fatal Error&quot;); else { L-&gt;capacity=max; L-&gt;array=(int*)malloc(sizeof(int)*max); if(L-&gt;array==NULL) printf(&quot;\n Fatal Error&quot;); else Ms. A. Aruna &amp; Ms .S. Rajasulochana , Department of IT, SNSC T Page 8 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 { L -&gt;size=0 ; printf(&quot; \n List is Created successfully&quot;) ; } } return L ; } int Isfull(LIST L ) { return L -&gt;size== L -&gt;capacity ; } void Insert(int x,LIST L,POSITION P ) { int i ; if(Isfull(L) ) printf(&quot; \n List is Full&quot;) ; els e { for(i=L -&gt;size -1;i&gt;=P;i-- ) L - &gt;arra y[i+1]=L - &gt;arra y[i] ; L -&gt;size++ ; L - &gt;arra y[P]=x ; } } POSITION Findprevious(int x,LIST L ) { POSITION P ; P= - 1 ; while(P!=L -&gt;size&amp;&amp;L - &gt;arra y[P+1]!=x ) { P++ ; } return P ; } POSITION Find(int x,LIST L ) { POSITION P ; P=0 ; while(P!=L -&gt;size&amp;&amp;L - &gt;arra y[P]!=x ) { P++ ; } return P ; }Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 9 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 void Delete(int x,LIST L) { int i; POSITION P; P=Find(x,L); if(P==L-&gt;size) printf(&quot;\n Element not found in the list&quot;); else { for(i=P;isize;i++) L-&gt;array[i]=L-&gt;array[i+1]; L-&gt;size--; } } LIST Deletelist(LIST L) { MakeEmpty(L); free(L); L=NULL; return L; } void Display(LIST L) { int i; for(i=0;isize;i++) printf(&quot;\n %d&quot;,L-&gt;array[i]); } &ldquo;array.c&rdquo; File: #include&quot;array.h&quot; #include void main() { LIST L=NULL; POSITION P; int a,choice,ch,element; clrscr(); printf(&quot;\n\n1.Create\n2.Insert\n3.Delete\n4.Display\n5.MakeEmpty\n6.Find\n7.IsEmpty\n8.IsFul l\n9.Deletelist\n10.Exit\n&quot;); A: printf(&quot;\n Enter Ur Option:\t&quot;); scanf(&quot;%d&quot;,&amp;choice); switch(choice) {Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 10 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 case 1: if(L==NULL) L=Createlist(5); else printf(&quot;\nList is already created&quot;); break; case 2: if(L==NULL) printf(&quot;\nList is not yet created&quot;); else { printf(&quot;\nEnter the Element to insert:\t&quot;); scanf(&quot;%d&quot;,&amp;element); if(L-&gt;size==0) Insert(element,L,0); else { printf(&quot;\n where u want to insert?\t1:Front\t2:Back\t3:middle\t::: &quot;); scanf(&quot;%d&quot;,&amp;ch); if(ch==1) Insert(element,L,0); else if(ch==2) Insert(element,L,L-&gt;size); else if(ch==3) { printf(&quot;\nWhere you want to insert:\t&quot;); scanf(&quot;%d&quot;,&amp;a); P=Find(a,L); if(Psize) Insert(element,L,P); else printf(&quot;\nElement is not in the list&quot;); } else printf(&quot;\n Ur choice is not available&quot;); } } break; case 3: if(L==NULL) printf(&quot;\nList is not yet created&quot;); if(Isempty(L)) Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 11 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 printf(&quot;\nList is empty&quot;); else { printf(&quot;\nEnter the element to delete:\t&quot;); scanf(&quot;%d&quot;,&amp;a); Delete(a,L); } break; case 4: if(L==NULL) printf(&quot;\nList is not yet created&quot;); else if(Isempty(L)) printf(&quot;\nList is empty&quot;); else { printf(&quot;\nElements present in the list are:&quot;); Display(L); } break; case 5: if(L==NULL) printf(&quot;\n List is not yet created &quot;); else MakeEmpty(L); break; case 6: if(L==NULL) printf(&quot;\n Not yet created&quot;); else if(Isempty(L)) printf(&quot;\n List is empty&quot;); else { printf(&quot;\n which element is to find:\t&quot;); scanf(&quot;%d&quot;,&amp;a); P=Find(a,L); printf(&quot;\n Element is at %d\t[0 to 4 means present]\t[5 means not present]&quot;,P); } break; case 7: if(L==NULL) printf(&quot;\n Not yet created&quot;); Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 12 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 else if(Isempty(L)) printf(&quot;\n List is empty&quot;); else printf(&quot;\n List is not empty&quot;); break; case 8: if(L==NULL) printf(&quot;\n Not yet created&quot;); else if(Isfull(L)) printf(&quot;\n List is FULL&quot;); else printf(&quot;\n List is not FULL&quot;); break; case 9: if(L==NULL) printf(&quot;\n Not yet created&quot;); else { L=Deletelist(L); printf(&quot;\n List is Deleted&quot;); } break; case 10: exit (0); break; default: printf(&quot;\n\n *******WRONG ENTRY*******&quot;); break; } goto A; } Output 1.Create 2.Insert 3.Delete 4.Display 5.MakeEmpty 6.Find 7.IsEmpty 8.IsFull 9.Deletelist 10.Exit Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 13 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 Enter Ur Option: 1 List is created successfully Enter Ur Option: 2 Enter the element to insert: 300 Enter Ur Option: 2 Enter the element to insert: 100 Where U want to insert? 1.Front 2.Back 3.Middle ::::: 1 Enter Ur Option: 2 Enter the element to insert: 200 Where U want to insert? 1.Front 2.Back 3.Middle ::::: 3 Enter Ur Option: 2 Enter the element to insert: 400 Where U want to insert? 1.Front 2.Back 3.Middle ::::: 2 Enter Ur Option: 2 Enter the element to insert: 500 Where U want to insert? 1.Front 2.Back 3.Middle ::::: 2 Enter Ur Option: 2 Enter the element to insert: 600 Where U want to insert? 1.Front 2.Back 3.Middle ::::: 1 List is Full Enter Ur Option: 4 Elements present in the list are 100 200 300 400 500 Enter Ur Option: 7 List is not empty Enter Ur Option: 6 Which element is to find: 500 Element at 4 [0 to 4 &ndash; present] [5 &ndash; not present] Enter Ur Option: 3 Enter the element to delete: 300 Enter Ur Option: 4 Elements present in the list are: 100 200 400 500 Enter Ur Option: 8 List is not Full Enter Ur Option: 5 Now List becomes Empty Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 14 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 Enter Ur Option: 9 List is Deleted Enter Ur Option: 2 List is not yet created Enter Ur Option: 12 *******WRONG ENTRY******* Enter Ur Option: 10 Program without pointer #include #include #define MAX 10 void create(); void insert(); void deletion(); void search(); void display(); int a,b[20], n, p, e, f, i, pos; void main() { //clrscr(); int ch; char g=&apos;y&apos;; do { printf(&quot;\n main Menu&quot;); printf(&quot;\n 1.Create \n 2.Delete \n 3.Search \n 4.Insert \n 5.Display\n 6.Exit \n&quot;); printf(&quot;\n Enter your Choice&quot;); scanf(&quot;%d&quot;, &amp;ch); switch(ch) { case 1: create(); break; case 2: deletion(); break; case 3: search(); break; case 4: insert(); break; Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 15 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 case 5: display(); break; case 6: exit(); break; default: printf(&quot;\n Enter the correct choice:&quot;); } printf(&quot;\n Do u want to continue:::&quot;); scanf(&quot;\n%c&quot;, &amp;g); } while(g==&apos;y&apos;||g==&apos;Y&apos;); getch(); } void create() { printf(&quot;\n Enter the number of nodes&quot;); scanf(&quot;%d&quot;, &amp;n); for(i=0;i=n) { printf(&quot;\n Invalid Location::&quot;); } else { for(i=pos+1;i=n) { printf(&quot;\n invalid Location::&quot;); } else { for(i=MAX-1;i&gt;=pos-1;i--) { b[i+1]=b[i]; } printf(&quot;\n Enter the element to insert::\n&quot;); scanf(&quot;%d&quot;,&amp;p); b[pos]=p; n++; } printf(&quot;\n The list after insertion::\n&quot;); display(); } void display() Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 17 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 { printf(&quot;\n The Elements of The list ADT are:&quot;); for(i=0;i int stack[100],choice,n,top,x,i; void push(void); void pop(void); void display(void); int main() { //clrscr(); top=-1; printf(&quot;\n Enter the size of STACK[MAX=100]:&quot;); scanf(&quot;%d&quot;,&amp;n); Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 20 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 printf(&quot;\n\t STACK OPERATIONS USING ARRAY&quot;); printf(&quot;\n\t--------------------------------&quot;); printf(&quot;\n\t 1.PUSH\n\t 2.POP\n\t 3.DISPLAY\n\t 4.EXIT&quot;); do { printf(&quot;\n Enter the Choice:&quot;); scanf(&quot;%d&quot;,&amp;choice); switch(choice) { case 1: { push(); break; } case 2: { pop(); break; } case 3: { display(); break; } case 4: { printf(&quot;\n\t EXIT POINT &quot;); break; } default: { printf (&quot;\n\t Please Enter a Valid Choice(1/2/3/4)&quot;); } } } while(choice!=4); return 0; } void push() { if(top&gt;=n-1) { printf(&quot;\n\tSTACK is over flow&quot;); Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 21 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 } else { printf(&quot; Enter a value to be pushed:&quot;); scanf(&quot;%d&quot;,&amp;x); top++; stack[top]=x; } } void pop() { if(top&lt;=-1) { printf(&quot;\n\t Stack is under flow&quot;); } else { printf(&quot;\n\t The popped elements is %d&quot;,stack[top]); top--; } } void display() { if(top&gt;=0) { printf(&quot;\n The elements in STACK \n&quot;); for(i=top; i&gt;=0; i--) printf(&quot;\n%d&quot;,stack[i]); printf(&quot;\n Press Next Choice&quot;); } else { printf(&quot;\n The STACK is empty&quot;); } } Output Enter the size of STACK[MAX=100]:10 STACK OPERATIONS USING ARRAY -------------------------------- Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 22 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 1.PUSH 2.POP 3.DISPLAY 4.EXIT Enter the Choice:1 Enter a value to be pushed:12 Enter the Choice:1 Enter a value to be pushed:24 Enter the Choice:1 Enter a value to be pushed:98 Enter the Choice:3 The elements in STACK 98 24 12 Press Next Choice Enter the Choice:2 The popped elements is 98 Enter the Choice:3 The elements in STACK 24 12 Press Next Choice Enter the Choice:4 Result Thus, the Array implementation of stack ADT has been executed successfully and output is verified. Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 23 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 Aim To write a C program to implement stack ADT using Array. Theory A queue data structure can be implemented using one dimensional array. The queue implemented using array stores only fixed number of data values. The implementation of queue data structure using array is very simple. Just define a one-dimensional array of specific size and insert or delete the values into that array by using FIFO (First In First Out) principle with the help of variables &apos;front&apos; and &apos;rear&apos;. Initially both &apos;front&apos; and &apos;rear&apos; are set to -1. Whenever, we want to insert a new value into the queue, increment &apos;rear&apos; value by one and then insert at that position. Whenever we want to delete a value from the queue, then delete the element which is at &apos;front&apos; position and increment &apos;front&apos; value by one. Algorithm Step 1: Include all the header files which are used in the program and define a constant &apos;SIZE&apos; with specific value. Step 2: Declare all the user defined functions which are used in queue implementation. Step 3: Create a one dimensional array with above defined SIZE (int queue[SIZE]) Step 4: Define two integer variables &apos;front&apos; and &apos;rear&apos; and initialize both with &apos;-1&apos;. (int front = -1, rear = -1) Step 5: Then implement main method by displaying menu of operations list and make suitable function calls to perform operation selected by the user on queue. Step 6: enQueue(value) - Inserting value into the queue &bull; Check whether queue is FULL. (rear == SIZE-1) &bull; If it is FULL, then display &quot;Queue is FULL!!! Insertion is not possible!!!&quot; and terminate the function. &bull; If it is NOT FULL, then increment rear value by one (rear++) and set queue[rear] = value. Step 7: deQueue() - Deleting a value from the Queue Ex.No: 02 b Array Implementation of Queue ADT Date : Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 24 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 &bull; Check whether queue is EMPTY. (front == rear) &bull; If it is EMPTY, then display &quot;Queue is EMPTY!!! Deletion is not possible!!!&quot; and terminate the function. &bull; If it is NOT EMPTY, then increment the front value by one (front ++). Then display queue[front] as deleted element. Then check whether both front and rear are equal (front == rear), if it TRUE, then set both front and rear to &apos;-1&apos; (front = rear = -1). Step 8: Displays the elements of a Queue &bull; Check whether queue is EMPTY. (front == rear) &bull; If it is EMPTY, then display &quot;Queue is EMPTY!!!&quot; and terminate the function. &bull; If it is NOT EMPTY, then define an integer variable &apos;i&apos; and set &apos;i = front+1&apos;. &bull; Display &apos;queue[i]&apos; value and increment &apos;i&apos; value by one (i++). Repeat the same until &apos;i&apos; value reaches to rear (i &lt;= rear) Program #include #include #define SIZE 10 void enQueue(int); void deQueue(); void display(); int queue[SIZE], front = -1, rear = -1; void main() { int value, choice; clrscr(); while(1){ printf(&quot;\n\n***** MENU *****\n&quot;); printf(&quot;1. Insertion\n2. Deletion\n3. Display\n4. Exit&quot;); printf(&quot;\nEnter your choice: &quot;); Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 25 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 scanf(&quot;%d&quot;,&amp;choice); switch(choice){ case 1: printf(&quot;Enter the value to be insert: &quot;); scanf(&quot;%d&quot;,&amp;value); enQueue(value); break; case 2: deQueue(); break; case 3: display(); break; case 4: exit(0); default: printf(&quot;\nWrong selection!!! Try again!!!&quot;); } } } void enQueue(int value){ if(rear == SIZE-1) printf(&quot;\nQueue is Full!!! Insertion is not possible!!!&quot;); else{ if(front == -1) front = 0; rear++; queue[rear] = value; printf(&quot;\nInsertion success!!!&quot;); }} void deQueue(){ if(front == rear) printf(&quot;\nQueue is Empty!!! Deletion is not possible!!!&quot;); else{ printf(&quot;\nDeleted : %d&quot;, queue[front]); front++; Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 26 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 if(front == rear) front = rear = -1; }} void display(){ if(rear == -1) printf(&quot;\nQueue is Empty!!!&quot;); else{ int i; printf(&quot;\nQueue elements are:\n&quot;); for(i=front; i&lt;=rear; i++) printf(&quot;%d\t&quot;,queue[i]); }} Output Result Thus, the Array implementation of queue ADT has been executed successfully and output is verified. Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 27 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 Aim To implement a Program in C for the evaluation of Suffix expression with single digit operands and operators: +, -, *, /, %, ^ using stack concepts. Theory The Postfix notation is used to represent algebraic expressions. The expressions written in postfix form are evaluated faster compared to infix notation as parenthesis are not required in postfix. As Postfix expression is without parenthesis and can be evaluated as two operands and an operator at a time, this becomes easier for the compiler and the computer to handle. Evaluation rule of a Postfix Expression states: While reading the expression from left to right, push the element in the stack if it is an operand. Pop the two operands from the stack, if the element is an operator and then evaluate it. Push back the result of the evaluation. Repeat it till the end of the expression. Algorithm Step 1: Create a stack to store operands (or values). Step 2: Scan the given expression and do the following for every scanned element. Step 2.1: If the element is a number, push it into the stack Step 2.2: If the element is an operator, pop operands for the operator from the stack. Evaluate the operator and push the result back to the stack Step 3: When the expression is ended, the number in the stack Program #include #include #include int i, top = -1; int op1, op2, res, s[20]; char postfix[90], symb; void push (int item) { Ex.No: 03 a Application of Stack and Queue ADT - Evaluation of Suffix expression Date : Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 28 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 top = top+1; s[top] = item; } int pop () { int item; item = s[top]; top = top-1; return item; } void main() { printf(&quot;\nEnter a valid postfix expression:\n&quot;); scanf(&quot;%s&quot;, postfix); for(i=0; postfix[i]!=&apos;\0&apos;; i++) { symb = postfix[i]; if(isdigit(symb)) { push(symb - &apos;0&apos;); } else { op2 = pop(); op1 = pop(); switch(symb) { case &apos;+&apos;: push(op1+op2); break; case &apos;-&apos;: push(op1-op2); break; case &apos;*&apos;: push(op1*op2); break; case &apos;/&apos;: push(op1/op2); break; case &apos;%&apos;: push(op1%op2); break; case &apos;$&apos;: case &apos;^&apos;: push(pow(op1, op2)); break; default : push(0); } } Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 29 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 } res = pop(); printf(&quot;\n Result = %d&quot;, res); } Output Enter a valid postfix expression: 623+-382/+*2$3+ Result = 52 Enter a valid postfix expression: 42$3*3-84/11+/+ Result = 46 Result Thus, the C program for evaluation of Suffix expression with single digit operands and operators: +, -, *, /, %, ^ using stack concepts has been executed successfully and output is verified. Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 30 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 Aim To implement a Program in C for the balancing parenthesis using stack concepts. Theory Algorithm Step 1: Declare a structure for character stack. Step 2: Now traverse the expression string exp. Step 2.1: If the current character is a starting bracket (&lsquo;(&lsquo; or &lsquo;{&lsquo; or &lsquo;[&lsquo;) then push it to stack. Step 2.2: If the current character is a closing bracket (&lsquo;)&rsquo; or &lsquo;}&rsquo; or &lsquo;]&rsquo;) then pop from stack and if the popped character is the matching starting bracket then fine else brackets are not balanced. Step 3: After complete traversal, if there is some starting bracket left in stack then &ldquo;NOT BALANCED&rdquo; Program #include #include #include Ex.No: 03 b Application of Stack and Queue ADT - Balancing Parenthesis Date : Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 31 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 #include #define MAX 30 int top=-1; int stack[MAX]; void push(char); char pop(); int match(char a,char b); int check(char []); int main() { char exp[MAX]; int valid; clrscr(); printf(&quot;Enter an algebraic expression : &quot;); gets(exp); valid=check(exp); if(valid==1) printf(&quot;Valid expression\n&quot;); else printf(&quot;Invalid expression\n&quot;); getch(); return 0; } int check(char exp[] ) { int i; char temp; for(i=0;i #include void towerOfHanoi(int n, char from_rod, char to_rod, char aux_rod) { if (n == 1) { printf(&quot;\n Move disk 1 from rod %c to rod %c&quot;, from_rod, to_rod); return; } towerOfHanoi(n-1, from_rod, aux_rod, to_rod); printf(&quot;\n Move disk %d from rod %c to rod %c&quot;, n, from_rod, to_rod); towerOfHanoi(n-1, aux_rod, to_rod, from_rod); } int main() { int n = 4; // Number of disks clrscr(); towerOfHanoi(n, &apos;A&apos;, &apos;C&apos;, &apos;B&apos;); // A, B and C are names of rods getch(); return 0; } Output Move disk 1 from rod A to rod B Move disk 2 from rod A to rod C Move disk 1 from rod B to rod C Move disk 3 from rod A to rod B Move disk 1 from rod C to rod A Move disk 2 from rod C to rod B Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 37 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 Move disk 1 from rod A to rod B Move disk 4 from rod A to rod C Move disk 1 from rod B to rod C Move disk 2 from rod B to rod A Move disk 1 from rod C to rod A Move disk 3 from rod B to rod C Move disk 1 from rod A to rod B Move disk 2 from rod A to rod C Move disk 1 from rod B to rod C Result Thus, the C program for Tower of Hanoi problem with n disks using stack concepts has been executed successfully and output is verified. Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 38 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 Aim To implement a Program in C for the producer and consumer problem Theory The producer-consumer problem is an example of a multi-process synchronization problem.. There is one Producer in the producer-consumer problem, Producer is producing some items, whereas there is one Consumer that is consuming the items produced by the Producer. The same memory buffer is shared by both producers and consumers which is of fixed-size. The task of the Producer is to produce the item, put it into the memory buffer, and again start producing items. Whereas the task of the Consumer is to consume the item from the memory buffer. &bull; The producer&rsquo;s job is to generate data, put it into the buffer, and start again. &bull; At the same time, the consumer is consuming the data (i.e., removing it from the buffer), one piece at a time. Algorithm Step 1: Define the maximum buffer size. Step 2: Enter the number of producers and consumers. Step 3: The producer produces the job and put it in the buffer. Step 4: The consumer takes the job from the buffer. Step 5: If the buffer is full the producer goes to sleep. Step 6: If the buffer is empty then consumer goes to sleep. Program LIFO #include #include int mutex=1,full=0,empty=3,x=0; int main() Ex.No: 03 d Application of Stack and Queue ADT &ndash; Producer and consumer Date : Problem Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 39 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 { int n; void producer(); void consumer(); int wait(int); int signal(int); printf(&quot;\n1.Producer\n2.Consumer\n3.Exit&quot;); while(1) { printf(&quot;\nEnter your choice:&quot;); scanf(&quot;%d&quot;,&amp;n); switch(n) { case 1: if((mutex==1)&amp;&amp;(empty!=0)) producer(); else printf(&quot;Buffer is full!!&quot;); break; case 2: if((mutex==1)&amp;&amp;(full!=0)) consumer(); else printf(&quot;Buffer is empty!!&quot;); break; case 3: exit(0); break; } } return 0; Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 40 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 } int wait(int s) { return (--s); } int signal(int s) { return(++s); } void producer() { mutex=wait(mutex); full=signal(full); empty=wait(empty); x++; printf(&quot;\nProducer produces the item %d&quot;,x); mutex=signal(mutex); } void consumer() { mutex=wait(mutex); full=wait(full); empty=signal(empty); printf(&quot;\nConsumer consumes item %d&quot;,x); x--; mutex=signal(mutex); }Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 41 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 Output Result Thus, the C program for producer and consumer problem using stack concepts has been executed successfully and output is verified. Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 42 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 Aim To construct the Binary Search Tree and perform the insertion and deletion operation using C Theory Binary search tree is a data structure that quickly allows us to maintain a sorted list of numbers. &bull; It is called a binary tree because each tree node has a maximum of two children. &bull; It is called a search tree because it can be used to search for the presence of a number in O(log(n)) time. The properties that separate a binary search tree from a regular binary tree is &bull; All nodes of left subtree are less than the root node &bull; All nodes of right subtree are more than the root node &bull; Both subtrees of each node are also BSTs i.e. they have the above two properties Algorithm Step 1: start Step 2: declare the necessary variables and function to be used in the program Step 3: Get the choice of the function that the user need to perform Step 4: Use. Malloc function for creation and insertion and findmin function for deletion Step 5: perform the operation and print the result Step 6: stop the process Program #include #include #include Ex.No: 04 a Binary Search Tree &ndash; Insertion and Deletion Operation Date : Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 43 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 #include struct tree { int data; struct tree *lchild; struct tree *rchild; }*t,*temp; int element; void inorder(struct tree *); struct tree * create(struct tree *, int); struct tree * find(struct tree *, int); struct tree * insert(struct tree *, int); struct tree * del(struct tree *, int); void main() { int ch; do { printf(&quot;\n\t\t\tBINARY SEARCH TREE&quot;); printf(&quot;\n\t\t\t****** ****** ****&quot;); printf(&quot;\nMain Menu\n&quot;); printf(&quot;\n1.Create\n2.Insert\n3.Delete\n4.Find\n5.Exit\n&quot;); printf(&quot;\nEnter ur choice :&quot;); scanf(&quot;%d&quot;,&amp;ch); switch(ch) {Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 44 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 case 1: printf(&quot;\nEnter the data:&quot;); scanf(&quot;%d&quot;,&amp;element); t=create(t,element); inorder(t); break; case2: printf(&quot;\nEnter the data:&quot;); scanf(&quot;%d&quot;,&amp;element); t=insert(t,element); inorder(t); break; case3: printf(&quot;\nEnter the data:&quot;); scanf(&quot;%d&quot;,&amp;element); t=del(t,element); inorder(t); break; case4: printf(&quot;\nEnter the data:&quot;); scanf(&quot;%d&quot;,&amp;element); temp=find(t,element); if(temp-&gt;data==element) printf(&quot;\nElement %d is at %d&quot;,element,temp); else printf(&quot;\nElement is not found&quot;); Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 45 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 break; case 5: exit(0); } }while(ch&lt;=5); } struct tree * create(struct tree *t, int element) { t=(struct tree *)malloc(sizeof(structtree)); t-&gt;data=element; t-&gt;lchild=NULL; t-&gt;rchild=NULL; return t; } struct tree * find(struct tree *t, int element) { if(t==NULL) return NULL; if(elementdata) return(find(t-&gt;lchild,element)); else if(element&gt;t-&gt;data) return(find(t-&gt;rchild,element)); else return t; }Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 46 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 struct tree *insert(struct tree *t,int element) { if(t==NULL) { t=(struct tree *)malloc(sizeof(struct tree)); t-&gt;data=element; t-&gt;lchild=NULL; t-&gt;rchild=NULL; return t; } else { if(elementdata) { t-&gt;lchild=insert(t-&gt;lchild,element); } elseif(element&gt;t-&gt;data) { t-&gt;rchild=insert(t-&gt;rchild,element); } elseif(element==t-&gt;data) { printf(&quot;element already present\n&quot;); } return t; }Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 47 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 } struct tree * del(struct tree *t, int element) { if(t==NULL) printf(&quot;element not found\n&quot;); elseif(elementdata) t-&gt;lchild=del(t-&gt;lchild,element); elseif(element&gt;t-&gt;data) t-&gt;rchild=del(t-&gt;rchild,element); elseif(t-&gt;lchild&amp;&amp;t-&gt;rchild) { temp=findmin(t-&gt;rchild); t-&gt;data=temp-&gt;data; t-&gt;rchild=del(t-&gt;rchild,t-&gt;data); } else { temp=t; if(t-&gt;lchild==NULL) t=t-&gt;rchild; else if(t-&gt;rchild==NULL) t=t-&gt;lchild; free(temp); } return t; Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 48 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 } void inorder(struct tree *t) { if(t==NULL) return; else { inorder(t-&gt;lchild); printf(&quot;\t%d&quot;,t-&gt;data); inorder(t-&gt;rchild); } } Output Result Thus, the C program to implement binary search tree was executed and the output was verified successfully. Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 49 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 Aim To construct the Binary Search Tree and perform the tree traversal operation using C Theory Binary search tree is a data structure that quickly allows us to maintain a sorted list of numbers. &bull; It is called a binary tree because each tree node has a maximum of two children. &bull; It is called a search tree because it can be used to search for the presence of a number in O(log(n)) time. The properties that separate a binary search tree from a regular binary tree is &bull; All nodes of left subtree are less than the root node &bull; All nodes of right subtree are more than the root node &bull; Both subtrees of each node are also BSTs i.e. they have the above two properties Algorithm Step 1: start the process Step 2: define and declare the functions to be used in the program Step 3: Get the choice from the user which is the type of traversal that the user needs to perform. Step 4: For inorder traversal, the left child, root and the right child will be visited for preorder, root, left child and tight child will be visited and for post order traversal, left child right child and then the root will be visited. Step 5: newnode can be inserted using malloc function Step 6: Display the results Step 7: stop Program #include #include struct node { Ex.No: 04 b Binary Search Tree &ndash; Tree Traversal Date : (pre-order, in-order, and post-order) Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 50 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 int data; struct node *rlink; struct node *llink; }*tmp=NULL; typedef struct node NODE; NODE *create(); void preorder(NODE *); void inorder(NODE *); void postorder(NODE *); void insert(NODE *); void main() { int n,i,m; clrscr(); do { printf(\n\n0.create\n\n1.insert \n\n2.preorder\n\n3.postorder\n\n4.inorder\n\n5.exit\n\n); printf(\n\nEnter ur choice); scanf(&ldquo;%d&rdquo;,&amp;m); switch(m) { case 0: tmp=create(); break; case 1: insert(tmp); break; case 2: printf(\n\nDisplay tree in Preorder traversal\n\n); Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 51 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 preorder(tmp); break; case 3: printf(\n\nDisplay Tree in Postorder\n\n); postorder(tmp); break; case 4: printf(\n\nInorder\n\n); inorder(tmp); break; case5: exit(0); } } while(n!=5); getch(); } void insert(NODE *root) { NODE *newnode; if(root==NULL) { newnode=create(); root=newnode; } else { newnode=create(); while(1) Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 52 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 { if(newnode-&gt;datadata) { if(root-&gt;llink==NULL) { root-&gt;llink=newnode; Break; }root=root-&gt;llink; }if(newnode-ot-&gt;data&gt;root-&gt;data) { if(root-&gt;rlink==NULL) { root-&gt;rlink=newnode; break; } root=root-&gt;rlink; } } } } NODE *create() { NODE *newnode; int n; newnode=(NODE*)malloc(sizeof(NODE)); printf(\n\nEnter the Data ); scanf(%d,&amp;n); newnode-&gt;data=n; newnode-&gt;llink=NULL; newnode-&gt;rlink=NULL; Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 53 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 return(newnode); } void postorder(NODE *tmp) { if(tmp!=NULL) { postorder(tmp-&gt;llink); postorder(tmp-&gt;rlink); printf(%d-&gt;,tmp-&gt;data); }} void inorder(NODE *tmp) { If (tmp!=NULL) { inorder(tmp-&gt;llink); printf(%d-&gt;,tmp-&gt;data); inorder(tmp-&gt;rlink); }} void preorder(NODE *tmp) { if(tmp!=NULL){ printf(%d-&gt;,tmp-&gt;data); preorder(tmp-&gt;llink); preorder(tmp-&gt;rlink); }} Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 54 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 Output Result Thus, the C program to perform tree traversal has been implemented and the output was verified successfully. Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 55 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 Aim To construct the Binary Search Tree and finding the maximum and minimum element in the tree using C Theory Binary search tree is a data structure that quickly allows us to maintain a sorted list of numbers. &bull; It is called a binary tree because each tree node has a maximum of two children. &bull; It is called a search tree because it can be used to search for the presence of a number in O(log(n)) time. The properties that separate a binary search tree from a regular binary tree is &bull; All nodes of left subtree are less than the root node &bull; All nodes of right subtree are more than the root node &bull; Both subtrees of each node are also BSTs i.e. they have the above two properties Algorithm Approach for finding minimum and maximum element: Step 1: Traverse the node from root to left recursively until left is NULL. Step 2: The node whose left is NULL is the node with minimum value. Step 3: Traverse the node from root to right recursively until right is NULL. Step 4: The node whose right is NULL is the node with maximum value. Program #include #include #include #include struct Node { int data; Ex.No: 04 c Binary Search Tree &ndash; Finding maximum and minimum element in the Date : tree Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 56 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 struct Node *left, *right; }; // A utility function to create a new node struct Node* newNode(int data) { struct Node* node = (struct Node*)malloc(sizeof(struct Node)); node-&gt;data = data; node-&gt;left = node-&gt;right = NULL; return (node); } // Returns maximum value in a given Binary Tree int findMax(struct Node* root) { // Base case int res,lres,rres; if (root == NULL) return INT_MIN; // Return maximum of 3 values: // 1) Root&apos;s data 2) Max in Left Subtree // 3) Max in right subtree res = root-&gt;data; lres = findMax(root-&gt;left); rres = findMax(root-&gt;right); Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 57 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 if (lres &gt; res) res = lres; if (rres &gt; res) res = rres; return res; } // Returns minimum value in a given Binary Tree int findMin(struct Node* root) { // Base case int res,lres,rres; if (root == NULL) return INT_MAX; // Return minimum of 3 values: // 1) Root&apos;s data 2) Max in Left Subtree // 3) Max in right subtree res = root-&gt;data; lres = findMin(root-&gt;left); rres = findMin(root-&gt;right); if (lres &lt; res) res = lres; if (rres &lt; res) res = rres; return res; Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 58 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 } // Driver code int main(void) { struct Node* NewRoot = NULL; struct Node* root = newNode(2); clrscr(); root-&gt;left = newNode(77); root-&gt;right = newNode(25); root-&gt;left-&gt;right = newNode(66); root-&gt;left-&gt;right-&gt;left = newNode(10); root-&gt;left-&gt;right-&gt;right = newNode(11); root-&gt;right-&gt;right = newNode(99); root-&gt;right-&gt;right-&gt;left = newNode(4); // Function call printf(&quot;Maximum element is %d \n&quot;, findMax(root)); printf(&quot;Manimum element is %d \n&quot;, findMin(root)); getch(); return 0; } Output Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 59 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 Result Thus, the C program to find the maximum and minimum element in the tree has been implemented and the output was verified successfully. Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 60 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 Aim To Implement a program to construct max heap to perform insertion and delete operations. Theory Heap data structure is a complete binary tree that satisfies the heap property, where any given node is &bull; always greater than its child node/s and the key of the root node is the largest among all other nodes. This property is also called max heap property. &bull; always smaller than the child node/s and the key of the root node is the smallest among all other nodes. This property is also called min heap property. Algorithm Step 1: Initialize the array Step 2: Create a complete binary tree from the array Step 3: Start from the first index of non-leaf node whose index is given by n/2 - 1. Step 4: Set current element i as largest. Step 5: The index of left child is given by 2i + 1 and the right child is given by 2i + 2. Step 6: If left Child is greater than current Element (i.e. element at i th index), set left Child Index as largest. Step 7: If right Child is greater than element in largest, set right Child Index as largest. Step 8: Swap largest with current Element Step 9: Repeat steps 3-7 until the subtrees are also heapified. Heapify(array, size, i) set i as largest leftChild = 2i + 1 rightChild = 2i + 2 if leftChild &gt; array[largest] Ex.No: 05 a Construct Max heap to perform insertion and delete operations Date : Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 61 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 set leftChildIndex as largest if rightChild &gt; array[largest] set rightChildIndex as largest swap array[i] and array[largest] To create a Max-Heap: MaxHeap(array, size) loop from the first index of non-leaf node down to zero call heapify Insert an element in Max Heap If there is no node, create a newNode. else (a node is already present) insert the newNode at the end (last node from left to right.) heapify the array Delete an element in Min Heap If nodeToBeDeleted is the leafNode remove the node Else swap nodeToBeDeleted with the lastLeafNode remove noteToBeDeleted heapify the array Program #include int array[100], n; main() { int choice, num; n = 0;/*Represents number of nodes in the heap*/ while(1) Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 62 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 { printf(&quot;1.Insert the element \n&quot;); printf(&quot;2.Delete the element \n&quot;); printf(&quot;3.Display all elements \n&quot;); printf(&quot;4.Quit \n&quot;); printf(&quot;Enter your choice : &quot;); scanf(&quot;%d&quot;, &amp;choice); switch(choice) { case 1: printf(&quot;Enter the element to be inserted to the list : &quot;); scanf(&quot;%d&quot;, &amp;num); insert(num, n); n = n + 1; break; case 2: printf(&quot;Enter the elements to be deleted from the list: &quot;); scanf(&quot;%d&quot;, &amp;num); delete(num); break; case 3: display(); break; case 4: Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 63 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 exit(0); default: printf(&quot;Invalid choice \n&quot;); }/*End of switch */ }/*End of while */ }/*End of main()*/ display() { int i; if (n == 0) { printf(&quot;Heap is empty \n&quot;); return; } for (i = 0; i &lt; n; i++) printf(&quot;%d &quot;, array[i]); printf(&quot;\n&quot;); }/*End of display()*/ insert(int num, int location) { int parentnode; while (location &gt; 0) { parentnode =(location - 1)/2; Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 64 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 if (num &lt;= array[parentnode]) { array[location] = num; return; } array[location] = array[parentnode]; location = parentnode; }/*End of while*/ array[0] = num; /*assign number to the root node */ }/*End of insert()*/ delete(int num) { int left, right, i, temp, parentnode; for (i = 0; i &lt; num; i++) { if (num == array[i]) break; } if (num != array[i]) { printf(&quot;%d not found in heap list\n&quot;, num); return; } array[i] = array[n - 1]; Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 65 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 n = n - 1; parentnode =(i - 1) / 2; /*find parentnode of node i */ if (array[i] &gt; array[parentnode]) { insert(array[i], i); return; } left = 2 * i + 1; /*left child of i*/ right = 2 * i + 2; /* right child of i*/ while (right &lt; n) { if (array[i] &gt;= array[left] &amp;&amp; array[i] &gt;= array[right]) return; if (array[right] &lt;= array[left]) { temp = array[i]; array[i] = array[left]; array[left] = temp; i = left; } else { temp = array[i]; array[i] = array[right]; Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 66 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 array[right] = temp; i = right; } left = 2 * i + 1; right = 2 * i + 2; }/*End of while*/ if (left == n - 1 &amp;&amp; array[i]) { temp = array[i]; array[i] = array[left]; array[left] = temp; }} Output Result Thus, the C program to construct max heap and its operations has been implemented successfully and the output is verified Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 67 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 Aim To Implement a program to construct min heap to perform insertion and delete operations. Theory Heap data structure is a complete binary tree that satisfies the heap property, where any given node is &bull; always greater than its child node/s and the key of the root node is the largest among all other nodes. This property is also called max heap property. &bull; always smaller than the child node/s and the key of the root node is the smallest among all other nodes. This property is also called min heap property. Algorithm Step 1: Check if the array has more than two elements. If it does not, remove the element in the first index. If it does, continue with the steps below. Step 2: Assign the last value to the first index. Step 3: Remove the last value from the array. Step 4: Check if the array has three elements remaining. If it is true, check if the first element is greater than the second element. Swap them if the condition is satisfied. If there are more than three elements, continue with the steps below. Step 5: Define the index of the parent node, left node, and right node. Step 6: Loop through the array that have both the left child value and right child value. Where the parent value is greater than the left child value or right child value, swap them. If the left node value is greater than the right node value, swap them as well. Step 7: If there is no right node value but the parent node is greater than the left node value, swap the values. Program #include #include #include struct Heap{ Ex.No: 05 b Construct Min heap to perform insertion and delete operations Date : Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 68 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 int *arr; int count; int capacity; int heap_type; // for min heap , 1 for max heap }; typedef struct Heap Heap; Heap *CreateHeap(int capacity,int heap_type); void insert(Heap *h, int key); void print(Heap *h); void heapify_bottom_top(Heap *h,int index); void heapify_top_bottom(Heap *h, int parent_node); int PopMin(Heap *h); int main(){ int i; Heap *heap = CreateHeap(20, 0); //Min Heap clrscr(); if( heap == NULL ){ printf(&quot;__Memory Issue____\n&quot;); return -1; } for(i =9;i&gt;0;i--) insert(heap, i); print(heap); for(i=9;i&gt;=0;i--){ printf(&quot; Pop Minima : %d\n&quot;, PopMin(heap)); print(heap); } getch(); Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 69 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 return 0; } Heap *CreateHeap(int capacity,int heap_type){ Heap *h = (Heap * ) malloc(sizeof(Heap)); //one is number of heap //check if memory allocation is fails if(h == NULL){ printf(&quot;Memory Error!&quot;); return; } h-&gt;heap_type = heap_type; h-&gt;count=0; h-&gt;capacity = capacity; h-&gt;arr = (int *) malloc(capacity*sizeof(int)); //size in bytes //check if allocation succeed if ( h-&gt;arr == NULL){ printf(&quot;Memory Error!&quot;); return; } return h; } void insert(Heap *h, int key){ if( h-&gt;count &lt; h-&gt;capacity){ h-&gt;arr[h-&gt;count] = key; heapify_bottom_top(h, h-&gt;count); h-&gt;count++; } } void heapify_bottom_top(Heap *h,int index){ Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 70 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 int temp; int parent_node = (index-1)/2; if(h-&gt;arr[parent_node] &gt; h-&gt;arr[index]){ //swap and recursive call temp = h-&gt;arr[parent_node]; h-&gt;arr[parent_node] = h-&gt;arr[index]; h-&gt;arr[index] = temp; heapify_bottom_top(h,parent_node); } } void heapify_top_bottom(Heap *h, int parent_node){ int left = parent_node*2+1; int right = parent_node*2+2; int min; int temp; if(left &gt;= h-&gt;count || left &lt;0) left = -1; if(right &gt;= h-&gt;count || right &lt;0) right = -1; if(left != -1 &amp;&amp; h-&gt;arr[left] &lt; h-&gt;arr[parent_node]) min=left; else min =parent_node; if(right != -1 &amp;&amp; h-&gt;arr[right] &lt; h-&gt;arr[min]) min = right; if(min != parent_node){ temp = h-&gt;arr[min]; h-&gt;arr[min] = h-&gt;arr[parent_node]; h-&gt;arr[parent_node] = temp; Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 71 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 // recursive call heapify_top_bottom(h, min); } } int PopMin(Heap *h){ int pop; if(h-&gt;count==0){ printf(&quot;\n__Heap is Empty__\n&quot;); return -1; } // replace first node by last and delete last pop = h-&gt;arr[0]; h-&gt;arr[0] = h-&gt;arr[h-&gt;count-1]; h-&gt;count--; heapify_top_bottom(h, 0); return pop; } void print(Heap *h){ int i; printf(&quot;____________Print Heap_____________\n&quot;); for(i=0;i&lt; h-&gt;count;i++){ printf(&quot;-&gt; %d &quot;,h-&gt;arr[i]); } printf(&quot;-&gt;__/\\__\n&quot;); }Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 72 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 Output ____________Print Heap_____________ -&gt; 1 -&gt; 2 -&gt; 4 -&gt; 3 -&gt; 7 -&gt; 8 -&gt; 5 -&gt; 9 -&gt; 6 -&gt;__/\__ Pop Minima : 1 ____________Print Heap_____________ -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 6 -&gt; 7 -&gt; 8 -&gt; 5 -&gt; 9 -&gt;__/\__ Pop Minima : 2 ____________Print Heap_____________ -&gt; 3 -&gt; 6 -&gt; 4 -&gt; 9 -&gt; 7 -&gt; 8 -&gt; 5 -&gt;__/\__ Pop Minima : 3 ____________Print Heap_____________ -&gt; 4 -&gt; 6 -&gt; 5 -&gt; 9 -&gt; 7 -&gt; 8 -&gt;__/\__ Pop Minima : 4 ____________Print Heap_____________ -&gt; 5 -&gt; 6 -&gt; 8 -&gt; 9 -&gt; 7 -&gt;__/\__ Pop Minima : 5 ____________Print Heap_____________ -&gt; 6 -&gt; 7 -&gt; 8 -&gt; 9 -&gt;__/\__ Pop Minima : 6 ____________Print Heap_____________ -&gt; 7 -&gt; 9 -&gt; 8 -&gt;__/\__ Pop Minima : 7 ____________Print Heap_____________ -&gt; 8 -&gt; 9 -&gt;__/\__ Pop Minima : 8 ____________Print Heap_____________ -&gt; 9 -&gt;__/\__ Pop Minima : 9 ____________Print Heap_____________ -&gt;__/\__ __Heap is Empty__ Pop Minima : -1 ____________Print Heap_____________ -&gt;__/\__ Result Thus, the C program to construct min heap and its operations has been implemented successfully and the output is verified Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 73 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 Aim To implement a C program to find shortest path in graph using Dijkstra&apos;s algorithm Theory Dijkstra algorithm is also called single source shortest path algorithm. It is based on greedy technique. The algorithm maintains a list visited [ ] of vertices, whose shortest distance from the source is already known. If visited [1], equals 1, then the shortest distance of vertex i is already known. Initially, visited[i] is marked as, for source vertex. At each step, we mark visited[v] as 1. Vertex v is a vertex at shortest distance from the source vertex. Time Complexity The program contains two nested loops each of which has a complexity of O(n). n is number of vertices. So the complexity of algorithm is O(n 2 ). Algorithm Step 1: Create cost matrix C[ ][ ] from adjacency matrix adj[ ][ ]. C[i][j] is the cost of going from vertex i to vertex j. If there is no edge between vertices i and j then C[i][j] is infinity. Step 2: Array visited[ ] is initialized to zero. for(i=0;i #include #define INFINITY 9999 #define MAX 10 void dijkstra(int G[MAX][MAX],int n,int startnode); int main() { int G[MAX][MAX],i,j,n,u; printf(&quot;Enter no. of vertices:&quot;); scanf(&quot;%d&quot;,&amp;n); printf(&quot;\nEnter the adjacency matrix:\n&quot;); for(i=0;i #include Ex.No: 07 Prim&apos;s algorithm Date : Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 79 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 int a,b,u,v,n,i,j,ne=1; int visited[10]= { 0 } ,min,mincost=0,cost[10][10]; void main() { clrscr(); printf(&quot;\n Enter the number of nodes:&quot;); scanf(&quot;%d&quot;,&amp;n); printf(&quot;\n Enter the adjacency matrix:\n&quot;); for (i=1;i&lt;=n;i++) for (j=1;j&lt;=n;j++) { scanf(&quot;%d&quot;,&amp;cost[i][j]); if(cost[i][j]==0) cost[i][j]=999; } visited[1]=1; printf(&quot;\n&quot;); while(ne #include #include struct set { int key; int data; Ex.No: 08 Hashing Technique Date : Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 82 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 }; struct set *array; int capacity = 10; int size = 0; int hashFunction(int key) { return (key % capacity); } int checkPrime(int n) { int i; if (n == 1 || n == 0) { return 0; } for (i = 2; i &lt; n / 2; i++) { if (n % i == 0) { return 0; } } return 1; } int getPrime(int n) { if (n % 2 == 0) { n++; Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 83 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 } while (!checkPrime(n)) { n += 2; } return n; } void init_array() { int i; capacity = getPrime(capacity); array = (struct set *)malloc(capacity * sizeof(struct set)); for (i = 0; i &lt; capacity; i++) { array[i].key = 0; array[i].data = 0; } } void insert(int key, int data) { int index = hashFunction(key); if (array[index].data == 0) { array[index].key = key; array[index].data = data; size++; printf(&quot;\n Key (%d) has been inserted \n&quot;, key); } else if (array[index].key == key) Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 84 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 { array[index].data = data; } else { printf(&quot;\n Collision occured \n&quot;); } } void remove_element(int key) { int index = hashFunction(key); if (array[index].data == 0) { printf(&quot;\n This key does not exist \n&quot;); } else { array[index].key = 0; array[index].data = 0; size--; printf(&quot;\n Key (%d) has been removed \n&quot;, key); } } void display() { int i; for (i = 0; i &lt; capacity; i++) { if (array[i].data == 0) Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 85 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 { printf(&quot;\n array[%d]: / &quot;, i); } else { printf(&quot;\n key: %d array[%d]: %d \t&quot;, array[i].key, i, array[i].data); } } } int size_of_hashtable() { return size; } int main() { int choice, key, data, n; int c = 0; clrscr(); init_array(); do { printf(&quot;1.Insert item in the Hash Table&quot; &quot;\n2.Remove item from the Hash Table&quot; &quot;\n3.Check the size of Hash Table&quot; &quot;\n4.Display a Hash Table&quot; &quot;\n\n Please enter your choice: &quot;); scanf(&quot;%d&quot;, &amp;choice); switch (choice) { Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 86 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 case 1: printf(&quot;Enter key -:\t&quot;); scanf(&quot;%d&quot;, &amp;key); printf(&quot;Enter data -:\t&quot;); scanf(&quot;%d&quot;, &amp;data); insert(key, data); break; case 2: printf(&quot;Enter the key to delete-:&quot;); scanf(&quot;%d&quot;, &amp;key); remove_element(key); break; case 3: n = size_of_hashtable(); printf(&quot;Size of Hash Table is-:%d\n&quot;, n); break; case 4: display(); break; default: printf(&quot;Invalid Input\n&quot;); } printf(&quot;\nDo you want to continue (press 1 for yes): &quot;); scanf(&quot;%d&quot;, &amp;c); } while (c == 1); getch(); }Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 87 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 Output Result Thus, the program to perform hashing operation using C has been implemented successfully and the output is verified Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 88 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 Aim To write a C program to search an element in the array using linear search Theory Searching is the process of finding some particular element in the list. If the element is present in the list, then the process is called successful, and the process returns the location of that element; otherwise, the search is called unsuccessful. Linear search is also called as sequential search algorithm. It is the simplest searching algorithm. In Linear search, we simply traverse the list completely and match each element of the list with the item whose location is to be found. If the match is found, then the location of the item is returned; otherwise, the algorithm returns NULL. It is widely used to search an element from the unordered list, i.e., the list in which items are not sorted. The worst-case time complexity of linear search is O(n). Algorithm Step 1: First, we have to traverse the array elements using a for loop. Step 2: In each iteration of for loop, compare the search element with the current array element, Step 2.1: If the element matches, then return the index of the corresponding array element. Step 2.2: If the element does not match, then move to the next element. Step 3: If there is no match or the search element is not present in the given array, return -1. Program #include int main() { int array[100], search, c, n; printf(&quot;Enter number of elements in array\n&quot;); scanf(&quot;%d&quot;, &amp;n); printf(&quot;Enter %d integer(s)\n&quot;, n); Ex.No: 08 a Linear Search Date : Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 89 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 for (c = 0; c &lt; n; c++) scanf(&quot;%d&quot;, &amp;array[c]); printf(&quot;Enter a number to search\n&quot;); scanf(&quot;%d&quot;, &amp;search); for (c = 0; c &lt; n; c++) { if (array[c] == search) /* If required element is found */ { printf(&quot;%d is present at location %d.\n&quot;, search, c+1); break; } } if (c == n) printf(&quot;%d isn&apos;t present in the array.\n&quot;, search); return 0; } Output Result Thus, the program to search an element in the array using linear search has been implemented successfully and the output is verified Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 90 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 Aim To write a C program to search an element in the array using Binary search Theory Searching is the process of finding some particular element in the list. If the element is present in the list, then the process is called successful, and the process returns the location of that element; otherwise, the search is called unsuccessful. Binary search is the search technique that works efficiently on sorted lists. Hence, to search an element into some list using the binary search technique, we must ensure that the list is sorted. Binary search follows the divide and conquer approach in which the list is divided into two halves, and the item is compared with the middle element of the list. If the match is found then, the location of the middle element is returned. Algorithm Step 1: Begin with the mid element of the whole array as a search key. Step 2: If the value of the search key is equal to the item then return an index of the search key. Step 3: Or if the value of the search key is less than the item in the middle of the interval, narrow the interval to the lower half. Step 4: Otherwise, narrow it to the upper half. Step 5: Repeatedly check from the second point until the value is found or the interval is empty. Program #include #include int binarySearch(int [], int, int, int); int main() { int c, first, last, n, search, array[100], index; clrscr(); Ex.No: 08 b Binary Search Date : Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 91 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 printf(&quot;Enter number of elements\n&quot;); scanf(&quot;%d&quot;, &amp;n); printf(&quot;Enter %d integers\n&quot;, n); for (c = 0; c &lt; n; c++) scanf(&quot;%d&quot;, &amp;array[c]); printf(&quot;Enter value to find\n&quot;); scanf(&quot;%d&quot;, &amp;search); first = 0; last = n - 1; index = binarySearch(array, first, last, search); if (index == -1) printf(&quot;Not found! %d isn&apos;t present in the list.\n&quot;, search); else printf(&quot;%d is present at location %d.\n&quot;, search, index + 1); getch(); return 0; } int binarySearch(int a[], int s, int e, int f) { int m; if (s &gt; e) // Not found return -1; m = (s + e)/2; if (a[m] == f) // element found return m; else if (f &gt; a[m]) return binarySearch(a, m+1, e, f); else return binarySearch(a, s, m-1, f); }Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 92 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 Output Result Thus, the program to search an element in the array using binary search has been implemented successfully and the output is verified. Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 93 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 Aim To write a C program to arrange a list of integers in ascending order using Insertion sort Algorithm Theory Insertion sort is a simple sorting algorithm that works similar to the way you sort playing cards in your hands. The array is virtually split into a sorted and an unsorted part. Values from the unsorted part are picked and placed at the correct position in the sorted part. Characteristics of Insertion Sort This algorithm is one of the simplest algorithms with simple implementation Basically, Insertion sort is efficient for small data values Insertion sort is adaptive in nature, i.e. it is appropriate for data sets which are already partially sorted. Algorithm Step 1: If the element is the first one, it is already sorted. Step 2: Move to next element Step 3: Compare the current element with all elements in the sorted array Step 4: If the element in the sorted array is smaller than the current element, iterate to the next element. Otherwise, shift all the greater element in the array by one position towards the right Step 5: Insert the value at the correct position Step 6: Repeat until the complete list is sorted Program #include #include int main(){ int i, j, count, temp, number[25]; clrscr(); Ex.No: 10 a Insertion Sort Date : Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 94 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 printf(&quot;How many numbers u are going to enter?: &quot;); scanf(&quot;%d&quot;,&amp;count); printf(&quot;Enter %d elements: &quot;, count); for(i=0;i=0)){ number[j+1]=number[j]; j=j-1; } number[j+1]=temp; } printf(&quot;Order of Sorted elements: &quot;); for(i=0;i #include void bubbleSortExample(int arr[], int num){ int x, y, temp; for(x = 0; x &lt; num - 1; x++){ for(y = 0; y &lt; num - x - 1; y++){ if(arr[y] &gt; arr[y + 1]){ temp = arr[y]; arr[y] = arr[y + 1]; Ex.No: 10 b Bubble Sort Date : Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 97 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 arr[y + 1] = temp; } } }} int main(){ int arr[50], n, x; clrscr(); printf(&quot;Please Enter the Number of Elements you want in the array: &quot;); scanf(&quot;%d&quot;, &amp;n); printf(&quot;Please Enter the Value of Elements: &quot;); for(x = 0; x &lt; n; x++) scanf(&quot;%d&quot;, &amp;arr[x]); bubbleSortExample(arr, n); printf(&quot;Array after implementing bubble sort: &quot;); for(x = 0; x &lt; n; x++){ printf(&quot;%d &quot;, arr[x]); } getch(); return 0;} Output Result Thus, the program to arrange a list of integers in ascending order using Bubble sort Algorithm has been implemented successfully and the output is verified. Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 98 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 Aim To write a C program to arrange a list of integers in ascending order using Heap sort Algorithm Theory A heap is a complete binary tree, and the binary tree is a tree in which the node can have the utmost two children. A complete binary tree is a binary tree in which all the levels except the last level, i.e., leaf node, should be completely filled, and all the nodes should be left-justified. Heap Sort is a popular and efficient sorting algorithm in computer programming. Learning how to write the heap sort algorithm requires knowledge of two types of data structures - arrays and trees. Algorithm Step 1: Get the array of data from the user for perform the sorting Algorithm Step2: Once the array is received, to create a heap for sorting the elements in ascending order. Step 3: Now out of the heap, a max heap is needed to be created. Remember, the value of the root node/parent node is always greater than or equal to the value of the children nodes. Step 4: After building the tree, the above condition must be checked. If the value of the child node is greater than the child node, need to swap the values and repeat the process until it satisfies the max-heap property. Step 5: Once all the conditions are satisfied, the root node needs to be swapped with the last node. Step 6: As it is now sorted, can remove the last node from our heap. Step 7: The previous three steps (Steps 4,5, &amp; 6) need to be repeated until there is only one element left in the heap. Program #include #include void main() Ex.No: 11 Heap Sort Date : Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 99 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 { int heap[10], no, i, j, c, root, temp; clrscr(): printf(&quot;\n Enter no of elements :&quot;); scanf(&quot;%d&quot;, &amp;no); printf(&quot;\n Enter the nos : &quot;); for (i = 0; i &lt; no; i++) scanf(&quot;%d&quot;, &amp;heap[i]); for (i = 1; i &lt; no; i++) { c = i; do { root = (c - 1) / 2; if (heap[root] &lt; heap[c]) /* to create MAX heap array */ { temp = heap[root]; heap[root] = heap[c]; heap[c] = temp; } c = root; } while (c != 0); } printf(&quot;Heap array : &quot;); for (i = 0; i &lt; no; i++) printf(&quot;%d\t &quot;, heap[i]); for (j = no - 1; j &gt;= 0; j--) { temp = heap[0]; Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 100 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 heap[0] = heap[j /* swap max element with rightmost leaf element */ heap[j] = temp; root = 0; do { c = 2 * root + 1; /* left node of root element */ if ((heap[c] &lt; heap[c + 1]) &amp;&amp; c &lt; j-1) c++; if (heap[root] #include void quicksort(int number[25],int first,int last){ Ex.No: 12 a Quick Sort Date : QUICKSORT (array A, start, end) { if (start &lt; end) { p = partition(A, start, end) QUICKSORT (A, start, p - 1) QUICKSORT (A, p + 1, end) } } PARTITION (array A, start, end) { pivot ? A[end] i ? start-1 for j ? start to end -1 { do if (A[j] &lt; pivot) { then i ? i + 1 swap A[i] with A[j] }} swap A[i+1] with A[end] return i+1 Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 103 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 int i, j, pivot, temp; if(firstnumber[pivot]) j--; if(i #include void mergesort(int a[],int i,int j); void merge(int a[],int i1,int j1,int i2,int j2); int main() { int a[30],n,i; clrscr(); printf(&quot;Enter no of elements:&quot;); scanf(&quot;%d&quot;,&amp;n); printf(&quot;Enter array elements:&quot;); for(i=0;i DATA Step 4: SET PTR = PTR-&gt;NEXT [END OF LOOP] Step 5: EXIT Insert at beginning Step 1: IF AVAIL = NULL Write OVERFLOW Go to Step 7 [END OF IF] Step 2: SET NEW_NODE = AVAIL Step 3: SET AVAIL = AVAIL -&gt; NEXT Ex.No: 16 Content Beyond Syllabus &ndash; Singly Linked List Date : Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 110 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 Step 4: SET NEW_NODE -&gt; DATA = VAL Step 5: SET NEW_NODE -&gt; NEXT = HEAD Step 6: SET HEAD = NEW_NODE Step 7: EXIT Insert at end Step 1: IF AVAIL = NULL Write OVERFLOW Go to Step 10 [END OF IF] Step 2: SET NEW_NODE = AVAIL Step 3: SET AVAIL = AVAIL -&gt; NEXT Step 4: SET NEW_NODE -&gt; DATA = VAL Step 5: SET NEW_NODE -&gt; NEXT = NULL Step 6: SET PTR = HEAD Step 7: Repeat Step 8 while PTR -&gt; NEXT != NULL Step 8: SET PTR = PTR -&gt; NEXT [END OF LOOP] Step 9: SET PTR -&gt; NEXT = NEW_NODE Step 10: EXIT Insert after an Element Step 1: IF AVAIL = NULL Write OVERFLOW Go to Step 12 [END OF IF] Step 2: SET NEW_NODE = AVAIL Step 3: SET AVAIL = AVAIL -&gt; NEXT Step 4: SET NEW_NODE -&gt; DATA = VAL Step 5: SET PTR = HEAD Step 6: SET PREPTR = PTR Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 111 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 Step 7: Repeat Steps 8 and 9 while PREPTR -&gt; DATA != NUM Step 8: SET PREPTR = PTR Step 9: SET PTR = PTR -&gt; NEXT [END OF LOOP] Step 10: PREPTR -&gt; NEXT = NEW_NODE Step 11: SET NEW_NODE -&gt; NEXT = PTR Step 12: EXIT Delete from Beginning Step 1: IF HEAD = NULL Write UNDERFLOW Go to Step 5 [END OF IF] Step 2: SET PTR = HEAD Step 3: SET HEAD = HEAD -&gt; NEXT Step 4: FREE PTR Step 5: EXIT Delete from End Step 1: IF HEAD = NULL Write UNDERFLOW Go to Step 8 [END OF IF] Step 2: SET PTR = HEAD Step 3: Repeat Steps 4 and 5 while PTR -&gt; NEXT != NULL Step 4: SET PREPTR = PTR Step 5: SET PTR = PTR -&gt; NEXT [END OF LOOP] Step 6: SET PREPTR -&gt; NEXT = NULL Step 7: FREE PTR Step 8: EXIT Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 112 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 Delete after a Node Step 1: IF HEAD = NULL Write UNDERFLOW Go to Step 10 [END OF IF] Step 2: SET PTR = HEAD Step 3: SET PREPTR = PTR Step 4: Repeat Steps 5 and 6 while PREPTR -&gt; DATA != NUM Step 5: SET PREPTR = PTR Step 6: SET PTR = PTR -&gt; NEXT [END OF LOOP] Step 7: SET TEMP = PTR Step 8: SET PREPTR -&gt; NEXT = PTR -&gt; NEXT Step 9: FREE TEMP Step 10: EXIT Search Step 1: [INITIALIZE] SET PTR = HEAD Step 2: Repeat Steps 3 and 4 while PTR != NULL Step 3: If ITEM = PTR -&gt; DATA SET POS = PTR Go To Step 5 ELSE SET PTR = PTR -&gt; NEXT [END OF IF] [END OF LOOP] Step 4: SET POS = NULL Step 5: EXIT Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 113 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 Program #include #include #include struct node { int data; struct node *next; }; struct node *head; void beginsert (); void lastinsert (); void randominsert(); void begin_delete(); void last_delete(); void random_delete(); void display(); void search(); void main () { int choice =0; clrscr(); while(choice != 9) { printf(&quot;\n\n*********Main Menu*********\n&quot;); printf(&quot;\nChoose one option from the following list ...\n&quot;); printf(&quot;\n===============================================\n&quot;); Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 114 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 printf(&quot;\n1.Insert in beginning\n2.Insert at last\n3.Insert at any random location\n4.Delete from Beginning\n5.Delete from last\n6.Delete node after specified location\n7.Search for an element\n8.Show\n9.Exit\n&quot;); printf(&quot;\nEnter your choice?\n&quot;); scanf(&quot;\n%d&quot;,&amp;choice); switch(choice) { case 1: beginsert(); break; case 2: lastinsert(); break; case 3: randominsert(); break; case 4: begin_delete(); break; case 5: last_delete(); break; case 6: random_delete(); break; case 7: search(); break; case 8: Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 115 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 display(); break; case 9: exit(0); break; default: printf(&quot;Please enter valid choice..&quot;); } } getch(); } void beginsert() { struct node *ptr; int item; ptr = (struct node *) malloc(sizeof(struct node *)); if(ptr == NULL) { printf(&quot;\nOVERFLOW&quot;); } else { printf(&quot;\nEnter value\n&quot;); scanf(&quot;%d&quot;,&amp;item); ptr-&gt;data = item; ptr-&gt;next = head; head = ptr; printf(&quot;\nNode inserted&quot;); } Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 116 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 } void lastinsert() { struct node *ptr,*temp; int item; ptr = (struct node*)malloc(sizeof(struct node)); if(ptr == NULL) { printf(&quot;\nOVERFLOW&quot;); } else { printf(&quot;\nEnter value?\n&quot;); scanf(&quot;%d&quot;,&amp;item); ptr-&gt;data = item; if(head == NULL) { ptr -&gt; next = NULL; head = ptr; printf(&quot;\nNode inserted&quot;); } else { temp = head; while (temp -&gt; next != NULL) { temp = temp -&gt; next; } Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 117 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 temp-&gt;next = ptr; ptr-&gt;next = NULL; printf(&quot;\nNode inserted&quot;); } } } void randominsert() { int i,loc,item; struct node *ptr, *temp; ptr = (struct node *) malloc (sizeof(struct node)); if(ptr == NULL) { printf(&quot;\nOVERFLOW&quot;); } else { printf(&quot;\nEnter element value&quot;); scanf(&quot;%d&quot;,&amp;item); ptr-&gt;data = item; printf(&quot;\nEnter the location after which you want to insert &quot;); scanf(&quot;\n%d&quot;,&amp;loc); temp=head; for(i=0;inext; if(temp == NULL) { Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 118 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 printf(&quot;\ncan&apos;t insert\n&quot;); return; } } ptr -&gt;next = temp -&gt;next; temp -&gt;next = ptr; printf(&quot;\nNode inserted&quot;); } } void begin_delete() { struct node *ptr; if(head == NULL) { printf(&quot;\nList is empty\n&quot;); } else { ptr = head; head = ptr-&gt;next; free(ptr); printf(&quot;\nNode deleted from the begining ...\n&quot;); } } void last_delete() { struct node *ptr,*ptr1; if(head == NULL) Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 119 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 { printf(&quot;\nlist is empty&quot;); } else if(head -&gt; next == NULL) { head = NULL; free(head); printf(&quot;\nOnly node of the list deleted ...\n&quot;); } else { ptr = head; while(ptr-&gt;next != NULL) { ptr1 = ptr; ptr = ptr -&gt;next; } ptr1-&gt;next = NULL; free(ptr); printf(&quot;\nDeleted Node from the last ...\n&quot;); } } void random_delete() { struct node *ptr,*ptr1; int loc,i; printf(&quot;\n Enter the location of the node after which you want to perform deletion \n&quot;); scanf(&quot;%d&quot;,&amp;loc); Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 120 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 ptr=head; for(i=0;inext; if(ptr == NULL) { printf(&quot;\nCan&apos;t delete&quot;); return; } } ptr1 -&gt;next = ptr -&gt;next; free(ptr); printf(&quot;\nDeleted node %d &quot;,loc+1); } void search() { struct node *ptr; int item,i=0,flag; ptr = head; if(ptr == NULL) { printf(&quot;\nEmpty List\n&quot;); } else { printf(&quot;\nEnter item which you want to search?\n&quot;); scanf(&quot;%d&quot;,&amp;item); Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 121 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 while (ptr!=NULL) { if(ptr-&gt;data == item) { printf(&quot;item found at location %d &quot;,i+1); flag=0; } else { flag=1; } i++; ptr = ptr -&gt; next; } if(flag==1) { printf(&quot;Item not found\n&quot;); } } } void display() { struct node *ptr; ptr = head; if(ptr == NULL) { printf(&quot;Nothing to print&quot;); } else { printf(&quot;\nprinting values . . . . .\n&quot;); Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 122 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 while (ptr!=NULL) { printf(&quot;\n%d&quot;,ptr-&gt;data); ptr = ptr -&gt; next; } } } Output *********Main Menu********* Choose one option from the following list ... =============================================== 1.Insert in beginning 2.Insert at last 3.Insert at any random location 4.Delete from Beginning 5.Delete from last 6.Delete node after specified location 7.Search for an element 8.Show 9.Exit Enter your choice? 1 Enter value 1 Node inserted *********Main Menu********* Choose one option from the following list ... =============================================== 1.Insert in beginning 2.Insert at last 3.Insert at any random location 4.Delete from Beginning 5.Delete from last 6.Delete node after specified location 7.Search for an element 8.Show 9.Exit Enter your choice? 2 Enter value? 2 Node inserted *********Main Menu********* Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 123 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 Choose one option from the following list ... =============================================== 1.Insert in beginning 2.Insert at last 3.Insert at any random location 4.Delete from Beginning 5.Delete from last 6.Delete node after specified location 7.Search for an element 8.Show 9.Exit Enter your choice? 3 Enter element value1 Enter the location after which you want to insert 1 Node inserted *********Main Menu********* Choose one option from the following list ... =============================================== 1.Insert in beginning 2.Insert at last 3.Insert at any random location 4.Delete from Beginning 5.Delete from last 6.Delete node after specified location 7.Search for an element 8.Show 9.Exit Enter your choice? 8 printing values . . . . . 1 2 1 *********Main Menu********* Choose one option from the following list ... =============================================== 1.Insert in begining 2.Insert at last 3.Insert at any random location 4.Delete from Beginning 5.Delete from last 6.Delete node after specified location Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 124 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 7.Search for an element 8.Show 9.Exit Enter your choice? 2 Enter value? 123 Node inserted *********Main Menu********* Choose one option from the following list ... =============================================== 1.Insert in beginning 2.Insert at last 3.Insert at any random location 4.Delete from Beginning 5.Delete from last 6.Delete node after specified location 7.Search for an element 8.Show 9.Exit Enter your choice? 1 Enter value 1234 Node inserted *********Main Menu********* Choose one option from the following list ... =============================================== 1.Insert in beginning 2.Insert at last 3.Insert at any random location 4.Delete from Beginning 5.Delete from last 6.Delete node after specified location 7.Search for an element 8.Show 9.Exit Enter your choice? 4 Node deleted from the beginning ... *********Main Menu********* Choose one option from the following list ... =============================================== 1.Insert in beginning Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 125 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 2.Insert at last 3.Insert at any random location 4.Delete from Beginning 5.Delete from last 6.Delete node after specified location 7.Search for an element 8.Show 9.Exit Enter your choice? 5 Deleted Node from the last ... *********Main Menu********* Choose one option from the following list ... =============================================== 1.Insert in beginning 2.Insert at last 3.Insert at any random location 4.Delete from Beginning 5.Delete from last 6.Delete node after specified location 7.Search for an element 8.Show 9.Exit Enter your choice? 6 Enter the location of the node after which you want to perform deletion 1 Deleted node 2 *********Main Menu********* Choose one option from the following list ... =============================================== 1.Insert in beginning 2.Insert at last 3.Insert at any random location 4.Delete from Beginning 5.Delete from last 6.Delete node after specified location 7.Search for an element 8.Show 9.Exit Enter your choice? 8 printing values . . . . . Ms.A. Aruna &amp; Ms.S. Rajasulochana, Department of IT, SNSCT Page 126 of 126 19ITP201 DATA STRUCTURES LABORATORY R - 2019 1 1 *********Main Menu********* Choose one option from the following list ... =============================================== 1.Insert in beginning 2.Insert at last 3.Insert at any random location 4.Delete from Beginning 5.Delete from last 6.Delete node after specified location 7.Search for an element 8.Show 9.Exit Enter your choice? 7 Enter item which you want to search? 1 item found at location 1 item found at location 2 *********Main Menu********* Choose one option from the following list ... =============================================== 1.Insert in beginning 2.Insert at last 3.Insert at any random location 4.Delete from Beginning 5.Delete from last 6.Delete node after specified location 7.Search for an element 8.Show 9.Exit Enter your choice? 9 Result Thus, the program to perform various operations using singly linked list has been implemented successfully and the output is verified.</p>
+               
             </li>
             <li>
                 <a href="#" onclick="openModal('File 3.jpg', 'This is the content of File 3.jpg')">File 3.jpg</a>
