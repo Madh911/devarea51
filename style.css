@@ -1,4 +1,8 @@
 body {
+    background-image: ('background-image.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     margin: 0;
     padding: 0;
     background-color: #000;
@@ -11,6 +15,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
 }
 
 .content {
