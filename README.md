@@ -12,6 +12,7 @@
 </head>
 <body>
     <h1>Welcome to the Test Site #Jagath Prakash</h1>
+    <img src="image.png" alt="Boy in a jacket">
 
     <p>This is a testing website where you can view and download files related to various programming topics.</p>
 
