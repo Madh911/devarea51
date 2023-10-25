@@ -1,6 +1,9 @@
-<html>
+<html lang="en">
 <head>
-    <title>Test Site</title>
+     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Website</title>
+    <link rel="stylesheet" href="style.css">
     <style>
         body {
             background-color: #000;
@@ -11,7 +14,18 @@
     </style>
 </head>
 <body>
-    <h1>Welcome to the Test Site #Jagath Prakash</h1>
+     <div class="container">
+        <div class="content">
+            <h1>Welcome to the Secret Website</h1>
+            <p>Please enter the secret password to access this site.</p>
+            <form id="password-form">
+                <input type="password" id="password" placeholder="Enter Password" required>
+                <button type="submit">Enter</button>
+            </form>
+            <p id="message"></p>
+        </div>
+    </div>
+    <h1>Welcome to the Test Site</h1>
     <img src="image.png" alt="Boy in a jacket">
 
     <p>This is a testing website where you can view and download files related to various programming topics.</p>
@@ -20,323 +34,6 @@
 
     <pre>
 
-Exp 1
-
-Program to create Teacher, Program and Student Classes with above mentioned data member sandmember functions.
-
-Program 
-
-# Class Teacher
-
-class Teacher:
-
-name=" department="
-
-hours = 0 programs Taught = 0
-
-# Set details
-
-def setDetails(self, Name, Dept, Hours, programs):
-
-self.name = Name
-
-7
-
-self.department = Dept
-
-self.hours = Hours
-
-self.programsTaught = programs
-
-#Get details
-
-def getDetails(self): details = []
-
-details.append(self.name) details.append(self.department) details.append(self.hours) details.append(self.programs Taught)
-
-return details
-
-# Class Program
-
-class Program:
-
-name="
-
-department="
-
-duration = 0
-
-# Set details
-
-def setDetails(self, Name, Dept, duration):
-
-self.name = Name
-
-self.department Dept self.duration duration
-
-#Get details
-
-def getDetails(self):
-
-details = []
-
-details.append(self.name) details.append(self.department)
-
-details.append(self.duration)
-
-return details
-
-# Class student
-
-class Student:
-
-name="
-
-rollNo="
-
-program=" department = "
-
-#Set details:
-
-def setDetails(self, Name, rollno, program, Dept):
-
-self.name = Name
-
-self.rollNo = rolino
-
-self.department Dept self.program program
-
-# Get details
-
-def getDetails(self): details = ||
-
-details.append(self.name)
-
-details.append(self.rollNo) details.append(self.program)
-
-details.append(self.department)
-
-return details
-
-# Driver code
-
-#Teacher staff1 = Teacher()
-
-staff1.setDetails(ashok, IT', 9, 11)
-
-teacherDetail = staff1.getDetails()
-
-print(teacherDetail)
-
-# Program
-
-program = Program()
-
-program.setDetails("Python programming', 'Computer Science, 9) programDetail = program.getDetails()
-
-print(programDetail)
-
-# Student
-
-stud1 = Student() stud1.setDetails('Ramalingam, 19CECS031', 'Computer Science', 'Python Programming')
-studentDetail = stud1.getDetails()
-print(studentDetail)
-
-Exp 2
-
-AIM
-
-Program the default department of Teacher, Program and Student should be "ComputerScience" however a different department could be assigned at runtime.
-
-
-Program Code:
-
-# Class Teacher
-
-class Teacher:
-
-name="
-
-department = "
-
-hours = 0
-
-programs Taught = 0
-
-def __init__(self):
-
-self.department = "Computer Science"
-
-# Set details
-
-def setDetails(self, Name, Dept, Hours, programs): self.name = Name
-
-self.department = Dept
-
-self.hours = Hours self.programs Taught = programs
-
-# Get details
-
-def getDetails(self):
-
-details=
-
-details.append(self.name)
-
-details.append(self.department)
-
-details.append(self.hours) details.append(self.programs Taught)
-
-return details
-
-# Class Program class Program:
-
-name = " # Constructor def __init__(self): department = "Computer Science"
-
-department=" duration=0
-
-# Set details def setDetails(self, Name, Dept, duration): self.name = Name
-
-self.department = Dept
-
-self.duration = duration
-
-#Get details
-
-def getDetails(self):
-
-details = []
-
-details.append(self.name)
-
-details.append(self.department)
-
-details.append(self.duration)
-
-return details
-
-Class student
-
-# class Student:
-
-name="
-
-rollNo="
-
-program="
-
-department = "
-
-def __init__(self):
-
-self.department = "Computer Science"
-
-# Set details
-
-def setDetails(self, Name, rollno, program, Dept): self.name = Name
-
-self.rollNo = rolino self.department Dept
-
-self.program = program
-
-# Get details
-
-def getDetails(self):
-
-details = ||
-
-details.append(self.name)
-
-details.append(self.rollNo)
-
-details.append(self.program) details.append(self.department)
-
-return details
-
-#Driver code
-
-#Teacher
-
-staff1 = Teacher()
-
-staff1.setDetails('ashok', 'IT', 9, 11)
-
-Staff2.setDetails('Dinesh', 'CSE', 12, 5) teacherDetail = staff1.getDetails()
-
-print(teacherDetail) teacherDetail = staff2.getDetails()
-
-print(teacherDetail)
-
-Program - 1
-
-no_of_books = int(input("Enter no of books: "))
-
-cov_price = float(input("Enter the cover price: ")) discount = float(input("Enter the discount percentage:"))
-
-cost = (cov_price) (discount/100)
-
-cost_aft_disc = cov_price - cost
-
-ship1 = float(input("Enter the shipping price for first copy: "))
-
-rem_charge = float(input("Enter the shipping price for other copies: "))
-
-ship2 = rem charge (no_of_books-1)
-
-total cost aft disc* no_of_books
-
-total_amnt = total + ship1 + ship2
-
-print("The total amount of books are: %3f%total amnt)
-
-Program 2 -
-
-from array import *
-
-city = ["Aligarh", "Agra", "Baroda", "Banaras", "Chennai", "New Delhi", "New Jalparipur", "Howrah", "Kolkata", "Mumbai"]
-
-items = array('i', [18,25,13,43,8,67,29,11,56,33])
-
-#Item display
-
-print("List of cities and no of items delivered\n")
-
-for i in range(0,10):
-
-print(city[i],"\t",items[i])
-
-print()
-
-#Max and Min deliveries
-
-max = (items.index(max(items)))
-
-min = (items.index(min(items)))
-
-print("Maximum delivery in: ",city[max]) print("Minimum delivery in: ",city[min])
-
-#Search for respective city
-
-src= input("Enter the city name to be found: ")
-
-for i in range(0,10):
-
-if(city[i].lower()==src.lower()):
-
-print("City: ",city[i])
-
-print("Products Sold: ",items[i])
-
-break
-
-else:
-
-continue
-
-else:
-
-print("No match found: ",src)
-    
 Array Implementation of List ADT
 
 “array.h” File:
@@ -1596,3 +1293,321 @@ if(tmp!=NULL){
 printf(%d->,tmp->data); 
 preorder(tmp->llink); preorder(tmp->rlink);
 }}
+
+Exp 1
+
+Program to create Teacher, Program and Student Classes with above mentioned data member sandmember functions.
+
+Program 
+
+# Class Teacher
+
+class Teacher:
+
+name=" department="
+
+hours = 0 programs Taught = 0
+
+# Set details
+
+def setDetails(self, Name, Dept, Hours, programs):
+
+self.name = Name
+
+7
+
+self.department = Dept
+
+self.hours = Hours
+
+self.programsTaught = programs
+
+#Get details
+
+def getDetails(self): details = []
+
+details.append(self.name) details.append(self.department) details.append(self.hours) details.append(self.programs Taught)
+
+return details
+
+# Class Program
+
+class Program:
+
+name="
+
+department="
+
+duration = 0
+
+# Set details
+
+def setDetails(self, Name, Dept, duration):
+
+self.name = Name
+
+self.department Dept self.duration duration
+
+#Get details
+
+def getDetails(self):
+
+details = []
+
+details.append(self.name) details.append(self.department)
+
+details.append(self.duration)
+
+return details
+
+# Class student
+
+class Student:
+
+name="
+
+rollNo="
+
+program=" department = "
+
+#Set details:
+
+def setDetails(self, Name, rollno, program, Dept):
+
+self.name = Name
+
+self.rollNo = rolino
+
+self.department Dept self.program program
+
+# Get details
+
+def getDetails(self): details = ||
+
+details.append(self.name)
+
+details.append(self.rollNo) details.append(self.program)
+
+details.append(self.department)
+
+return details
+
+# Driver code
+
+#Teacher staff1 = Teacher()
+
+staff1.setDetails(ashok, IT', 9, 11)
+
+teacherDetail = staff1.getDetails()
+
+print(teacherDetail)
+
+# Program
+
+program = Program()
+
+program.setDetails("Python programming', 'Computer Science, 9) programDetail = program.getDetails()
+
+print(programDetail)
+
+# Student
+
+stud1 = Student() stud1.setDetails('Ramalingam, 19CECS031', 'Computer Science', 'Python Programming')
+studentDetail = stud1.getDetails()
+print(studentDetail)
+
+Exp 2
+
+AIM
+
+Program the default department of Teacher, Program and Student should be "ComputerScience" however a different department could be assigned at runtime.
+
+
+Program Code:
+
+# Class Teacher
+
+class Teacher:
+
+name="
+
+department = "
+
+hours = 0
+
+programs Taught = 0
+
+def __init__(self):
+
+self.department = "Computer Science"
+
+# Set details
+
+def setDetails(self, Name, Dept, Hours, programs): self.name = Name
+
+self.department = Dept
+
+self.hours = Hours self.programs Taught = programs
+
+# Get details
+
+def getDetails(self):
+
+details=
+
+details.append(self.name)
+
+details.append(self.department)
+
+details.append(self.hours) details.append(self.programs Taught)
+
+return details
+
+# Class Program class Program:
+
+name = " # Constructor def __init__(self): department = "Computer Science"
+
+department=" duration=0
+
+# Set details def setDetails(self, Name, Dept, duration): self.name = Name
+
+self.department = Dept
+
+self.duration = duration
+
+#Get details
+
+def getDetails(self):
+
+details = []
+
+details.append(self.name)
+
+details.append(self.department)
+
+details.append(self.duration)
+
+return details
+
+Class student
+
+# class Student:
+
+name="
+
+rollNo="
+
+program="
+
+department = "
+
+def __init__(self):
+
+self.department = "Computer Science"
+
+# Set details
+
+def setDetails(self, Name, rollno, program, Dept): self.name = Name
+
+self.rollNo = rolino self.department Dept
+
+self.program = program
+
+# Get details
+
+def getDetails(self):
+
+details = ||
+
+details.append(self.name)
+
+details.append(self.rollNo)
+
+details.append(self.program) details.append(self.department)
+
+return details
+
+#Driver code
+
+#Teacher
+
+staff1 = Teacher()
+
+staff1.setDetails('ashok', 'IT', 9, 11)
+
+Staff2.setDetails('Dinesh', 'CSE', 12, 5) teacherDetail = staff1.getDetails()
+
+print(teacherDetail) teacherDetail = staff2.getDetails()
+
+print(teacherDetail)
+
+Program - 1
+
+no_of_books = int(input("Enter no of books: "))
+
+cov_price = float(input("Enter the cover price: ")) discount = float(input("Enter the discount percentage:"))
+
+cost = (cov_price) (discount/100)
+
+cost_aft_disc = cov_price - cost
+
+ship1 = float(input("Enter the shipping price for first copy: "))
+
+rem_charge = float(input("Enter the shipping price for other copies: "))
+
+ship2 = rem charge (no_of_books-1)
+
+total cost aft disc* no_of_books
+
+total_amnt = total + ship1 + ship2
+
+print("The total amount of books are: %3f%total amnt)
+
+Program 2 -
+
+from array import *
+
+city = ["Aligarh", "Agra", "Baroda", "Banaras", "Chennai", "New Delhi", "New Jalparipur", "Howrah", "Kolkata", "Mumbai"]
+
+items = array('i', [18,25,13,43,8,67,29,11,56,33])
+
+#Item display
+
+print("List of cities and no of items delivered\n")
+
+for i in range(0,10):
+
+print(city[i],"\t",items[i])
+
+print()
+
+#Max and Min deliveries
+
+max = (items.index(max(items)))
+
+min = (items.index(min(items)))
+
+print("Maximum delivery in: ",city[max]) print("Minimum delivery in: ",city[min])
+
+#Search for respective city
+
+src= input("Enter the city name to be found: ")
+
+for i in range(0,10):
+
+if(city[i].lower()==src.lower()):
+
+print("City: ",city[i])
+
+print("Products Sold: ",items[i])
+
+break
+
+else:
+
+continue
+
+else:
+
+print("No match found: ",src)
+    
