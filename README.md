@@ -18,6 +18,78 @@
     <h2>File</h2>
 
     <pre>
+    
+
+Program - 1
+
+no_of_books = int(input("Enter no of books: "))
+
+cov_price = float(input("Enter the cover price: ")) discount = float(input("Enter the discount percentage:"))
+
+cost = (cov_price) (discount/100)
+
+cost_aft_disc = cov_price - cost
+
+ship1 = float(input("Enter the shipping price for first copy: "))
+
+rem_charge = float(input("Enter the shipping price for other copies: "))
+
+ship2 = rem charge (no_of_books-1)
+
+total cost aft disc* no_of_books
+
+total_amnt = total + ship1 + ship2
+
+print("The total amount of books are: %3f%total amnt)
+
+Program 2 -
+
+from array import *
+
+city = ["Aligarh", "Agra", "Baroda", "Banaras", "Chennai", "New Delhi", "New Jalparipur", "Howrah", "Kolkata", "Mumbai"]
+
+items = array('i', [18,25,13,43,8,67,29,11,56,33])
+
+#Item display
+
+print("List of cities and no of items delivered\n")
+
+for i in range(0,10):
+
+print(city[i],"\t",items[i])
+
+print()
+
+#Max and Min deliveries
+
+max = (items.index(max(items)))
+
+min = (items.index(min(items)))
+
+print("Maximum delivery in: ",city[max]) print("Minimum delivery in: ",city[min])
+
+#Search for respective city
+
+src= input("Enter the city name to be found: ")
+
+for i in range(0,10):
+
+if(city[i].lower()==src.lower()):
+
+print("City: ",city[i])
+
+print("Products Sold: ",items[i])
+
+break
+
+else:
+
+continue
+
+else:
+
+print("No match found: ",src)
+    
 Array Implementation of List ADT
 
 “array.h” File:
