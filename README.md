@@ -18,7 +18,253 @@
     <h2>File</h2>
 
     <pre>
-    
+
+Exp 1
+
+Program to create Teacher, Program and Student Classes with above mentioned data member sandmember functions.
+
+Program 
+
+# Class Teacher
+
+class Teacher:
+
+name=" department="
+
+hours = 0 programs Taught = 0
+
+# Set details
+
+def setDetails(self, Name, Dept, Hours, programs):
+
+self.name = Name
+
+7
+
+self.department = Dept
+
+self.hours = Hours
+
+self.programsTaught = programs
+
+#Get details
+
+def getDetails(self): details = []
+
+details.append(self.name) details.append(self.department) details.append(self.hours) details.append(self.programs Taught)
+
+return details
+
+# Class Program
+
+class Program:
+
+name="
+
+department="
+
+duration = 0
+
+# Set details
+
+def setDetails(self, Name, Dept, duration):
+
+self.name = Name
+
+self.department Dept self.duration duration
+
+#Get details
+
+def getDetails(self):
+
+details = []
+
+details.append(self.name) details.append(self.department)
+
+details.append(self.duration)
+
+return details
+
+# Class student
+
+class Student:
+
+name="
+
+rollNo="
+
+program=" department = "
+
+#Set details:
+
+def setDetails(self, Name, rollno, program, Dept):
+
+self.name = Name
+
+self.rollNo = rolino
+
+self.department Dept self.program program
+
+# Get details
+
+def getDetails(self): details = ||
+
+details.append(self.name)
+
+details.append(self.rollNo) details.append(self.program)
+
+details.append(self.department)
+
+return details
+
+# Driver code
+
+#Teacher staff1 = Teacher()
+
+staff1.setDetails(ashok, IT', 9, 11)
+
+teacherDetail = staff1.getDetails()
+
+print(teacherDetail)
+
+# Program
+
+program = Program()
+
+program.setDetails("Python programming', 'Computer Science, 9) programDetail = program.getDetails()
+
+print(programDetail)
+
+# Student
+
+stud1 = Student() stud1.setDetails('Ramalingam, 19CECS031', 'Computer Science', 'Python Programming')
+studentDetail = stud1.getDetails()
+print(studentDetail)
+
+Exp 2
+
+AIM
+
+Program the default department of Teacher, Program and Student should be "ComputerScience" however a different department could be assigned at runtime.
+
+
+Program Code:
+
+# Class Teacher
+
+class Teacher:
+
+name="
+
+department = "
+
+hours = 0
+
+programs Taught = 0
+
+def __init__(self):
+
+self.department = "Computer Science"
+
+# Set details
+
+def setDetails(self, Name, Dept, Hours, programs): self.name = Name
+
+self.department = Dept
+
+self.hours = Hours self.programs Taught = programs
+
+# Get details
+
+def getDetails(self):
+
+details=
+
+details.append(self.name)
+
+details.append(self.department)
+
+details.append(self.hours) details.append(self.programs Taught)
+
+return details
+
+# Class Program class Program:
+
+name = " # Constructor def __init__(self): department = "Computer Science"
+
+department=" duration=0
+
+# Set details def setDetails(self, Name, Dept, duration): self.name = Name
+
+self.department = Dept
+
+self.duration = duration
+
+#Get details
+
+def getDetails(self):
+
+details = []
+
+details.append(self.name)
+
+details.append(self.department)
+
+details.append(self.duration)
+
+return details
+
+Class student
+
+# class Student:
+
+name="
+
+rollNo="
+
+program="
+
+department = "
+
+def __init__(self):
+
+self.department = "Computer Science"
+
+# Set details
+
+def setDetails(self, Name, rollno, program, Dept): self.name = Name
+
+self.rollNo = rolino self.department Dept
+
+self.program = program
+
+# Get details
+
+def getDetails(self):
+
+details = ||
+
+details.append(self.name)
+
+details.append(self.rollNo)
+
+details.append(self.program) details.append(self.department)
+
+return details
+
+#Driver code
+
+#Teacher
+
+staff1 = Teacher()
+
+staff1.setDetails('ashok', 'IT', 9, 11)
+
+Staff2.setDetails('Dinesh', 'CSE', 12, 5) teacherDetail = staff1.getDetails()
+
+print(teacherDetail) teacherDetail = staff2.getDetails()
+
+print(teacherDetail)
 
 Program - 1
 
