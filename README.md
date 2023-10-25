@@ -25,22 +25,11 @@
             <p id="message"></p>
         </div>
     </div>
-      <div class="hidden" id="next-page">
-        <h1>Welcome to the Secret Page</h1>
-        <p>This is the next page of the secret website.</p>
-    </div>
-
-    <script src="script.js"></script>
-    <h1>Welcome to the Test Site</h1>
-    <img src="image.png" alt="Boy in a jacket">
-
-    <p>This is a testing website where you can view and download files related to various programming topics.</p>
-
-    <h2>File</h2>
-
-    <pre>
-
-Array Implementation of List ADT
+    <div class="hidden" id="secret-content">
+        <div class="program">
+            <h2>Array Implementation of List ADT</h2>
+            <pre>
+                Array Implementation of List ADT
 
 “array.h” File:
 #include<stdio.h>
@@ -1617,3 +1606,18 @@ else:
 
 print("No match found: ",src)
     
+
+            </pre>
+            <button id="copy-button">Copy Code</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <h1>Welcome to the Test Site</h1>
+    <img src="image.png" alt="Boy in a jacket">
+    </body>
+</html>
+
+
+  
+
