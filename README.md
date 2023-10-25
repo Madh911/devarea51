@@ -27,7 +27,7 @@
     </div>
     <div class="hidden" id="secret-content">
         <div class="program">
-            <h2>DS prgms</h2>
+            <h2>DS programs</h2>
                <button id="copy-button">Copy Code</button>
             <pre>
                  <code>           
@@ -1608,13 +1608,9 @@ continue
 else:
 
 print("No match found: ",src)
- </code>
-      </pre>
-      </div>
+
        <script src="script.js"></script>
     <img src="image.png" alt="Boy in a jacket">
-    </body>
-</html>
 
 
   
