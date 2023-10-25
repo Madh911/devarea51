@@ -16,7 +16,7 @@
 <body>
      <div class="container">
         <div class="content">
-            <h1>Welcome to the Secret Website</h1>
+           <h1>Welcome to the Test Site</h1>
             <p>Please enter the secret password to access this site.</p>
             <form id="password-form">
                 <input type="password" id="password" placeholder="Enter Password" required>
@@ -27,8 +27,11 @@
     </div>
     <div class="hidden" id="secret-content">
         <div class="program">
-            <h2>Array Implementation of List ADT</h2>
+            <h2>DS prgms</h2>
+               <button id="copy-button">Copy Code</button>
             <pre>
+                 <code>           
+   
                 Array Implementation of List ADT
 
 “array.h” File:
@@ -1605,15 +1608,10 @@ continue
 else:
 
 print("No match found: ",src)
-    
-
-            </pre>
-            <button id="copy-button">Copy Code</button>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
-    <h1>Welcome to the Test Site</h1>
+ </code>
+      </pre>
+      </div>
+       <script src="script.js"></script>
     <img src="image.png" alt="Boy in a jacket">
     </body>
 </html>
