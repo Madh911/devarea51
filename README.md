@@ -1,6 +1,6 @@
 <html lang="en">
 <head>
-     <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secret Website</title>
     <link rel="stylesheet" href="style.css">
@@ -14,9 +14,9 @@
     </style>
 </head>
 <body>
-     <div class="container">
+    <div class="container">
         <div class="content">
-           <h1>Welcome to the Test Site</h1>
+            <h1>Welcome to the Test Site</h1>
             <p>Please enter the secret password to access this site.</p>
             <form id="password-form">
                 <input type="password" id="password" placeholder="Enter Password" required>
@@ -28,11 +28,10 @@
     <div class="hidden" id="secret-content">
         <div class="program">
             <h2>DS programs</h2>
-               <button id="copy-button">Copy Code</button>
+            <button id="copy-button">Copy Code</button>
             <pre>
-                 <code>           
-   
-                Array Implementation of List ADT
+                <code>           
+                      Array Implementation of List ADT
 
 “array.h” File:
 #include<stdio.h>
@@ -1608,10 +1607,16 @@ continue
 else:
 
 print("No match found: ",src)
-       <script src="script.js"></script>
+
+                </code>
+            </pre>
+        </div>
+    </div>
+    <script src="script.js"></script>
     <img src="image.png" alt="Boy in a jacket">
- </code> 
-  </pre>
-      </body>
-      </html>
+</body>
+</html>
+         
+   
+      
 
