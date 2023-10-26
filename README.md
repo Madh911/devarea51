@@ -1608,10 +1608,6 @@ continue
 else:
 
 print("No match found: ",src)
-
        <script src="script.js"></script>
     <img src="image.png" alt="Boy in a jacket">
-
-
-  
 
