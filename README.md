@@ -29,6 +29,9 @@
         <div class="program">
             <h2>DS programs</h2>
             <button id="copy-button">Copy Code</button>
+            
+<embed src="pythonprgms.pdf" type="application/pdf" width="600" height="400">
+
             <pre>
                 <code>           
                       Array Implementation of List ADT
