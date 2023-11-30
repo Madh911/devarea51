@@ -32,6 +32,8 @@
             
 <embed src="pythonprgms.pdf" type="application/pdf" width="600" height="400">
 
+<embed src="ds.pdf" type="application/pdf" width="600" height="400">
+
             <pre>
                 <code>           
                       Program 5.a
