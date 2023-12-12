@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
         event.preventDefault();
         const enteredPassword = passwordInput.value.trim();
 
-        if (enteredPassword === "youknow") {
+        if (enteredPassword === "jp") {
             secretContent.classList.remove("hidden");
             passwordForm.style.display = "none";
         } else {
