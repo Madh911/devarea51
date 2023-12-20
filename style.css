@@ -1,14 +1,9 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: url('background-image.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
     color: #fff;
     font-family: Arial, sans-serif;
 }
-
 .container {
     display: flex;
     justify-content: center;
@@ -33,84 +28,6 @@ h1 {
 p {
     font-size: 18px;
     margin-top: 10px;
-}
-
-form {
-    margin-top: 20px;
-}
-
-input[type="password"] {
-    padding: 10px;
-    width: 100%;
-    border: none;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
-
-button {
-    padding: 10px 20px;
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-#message {
-    color: #ff3333;
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-.hidden {
-    display: none;
-}
-
-#next-page {
-    background-color: rgba(0, 0, 0, 0.8);
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    margin-top: 20px;
-}
-.program {
-    background-color: rgba(0, 0, 0, 0.8);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    margin-top: 20px;
-    text-align: left;
-}
-
-pre {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    overflow-x: auto;
-}
-
-button#copy-button {
-    padding: 10px 20px;
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button#copy-button:hover {
-    background-color: #0056b3;
-}
-pre code {
-    background-color: #333;
-    color: #000; /* Change text color to black */
-    padding: 10px;
-    overflow-x: auto;
 }
 
 
