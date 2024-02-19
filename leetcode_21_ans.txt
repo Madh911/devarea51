@@ -1,4 +1,354 @@
 ----------------------------------------------------------------------------------
+22. Generate Parentheses (Java)
+
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        List<String> res = new ArrayList<String>();
+        recurse(res, 0, 0, "", n);
+        return res;
+    }
+    
+    public void recurse(List<String> res, int left, int right, String s, int n) {
+        if (s.length() == n * 2) {
+            res.add(s);
+            return;
+        }
+        
+        if (left < n) {
+            recurse(res, left + 1, right, s + "(", n);
+        }
+        
+        if (right < left) {
+            recurse(res, left, right + 1, s + ")", n);
+        }
+    }
+}
+----------------------------------------------------------------------------------
+23. Merge k Sorted Lists (Java)
+
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        if (lists==null || lists.length==0) return null;
+        
+        PriorityQueue<ListNode> queue= new PriorityQueue<ListNode>(lists.length, (a,b)-> a.val-b.val);
+        
+        ListNode dummy = new ListNode(0);
+        ListNode tail=dummy;
+        
+        for (ListNode node:lists)
+            if (node!=null)
+                queue.add(node);
+            
+        while (!queue.isEmpty()){
+            tail.next=queue.poll();
+            tail=tail.next;
+            
+            if (tail.next!=null)
+                queue.add(tail.next);
+        }
+        return dummy.next;
+    }
+}
+----------------------------------------------------------------------------------
+24. Swap Nodes in Pairs (Java)
+
+public class Solution {
+    public ListNode swapPairs(ListNode head) {
+        if ((head == null)||(head.next == null))
+            return head;
+        ListNode n = head.next;
+        head.next = swapPairs(head.next.next);
+        n.next = head;
+        return n;
+    }
+}
+----------------------------------------------------------------------------------
+25. Reverse Nodes in k-Group (Java)
+
+  public class Solution {
+        public ListNode reverseKGroup(ListNode head, int k) {
+            if (head==null||head.next==null||k<2) return head;
+    
+            ListNode dummy = new ListNode(0);
+            dummy.next = head;
+            
+            ListNode tail = dummy, prev = dummy,temp;
+            int count;
+            while(true){
+                count =k;
+                while(count>0&&tail!=null){
+                    count--;
+                    tail=tail.next;
+                } 
+                if (tail==null) break;//Has reached the end
+                
+                head=prev.next;
+                while(prev.next!=tail){
+                    temp=prev.next;//Assign
+                    prev.next=temp.next;//Delete
+                    
+                    temp.next=tail.next;
+                    tail.next=temp;//Insert
+                }
+                
+                tail=head;
+                prev=head;      
+            }
+            return dummy.next;  
+        }
+    }
+----------------------------------------------------------------------------------
+26. Remove Duplicates from Sorted Array (C++)
+
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        int j = 1;
+        for(int i = 1; i < nums.size(); i++){
+            if(nums[i] != nums[i - 1]){
+                nums[j] = nums[i];
+                j++;
+            }
+        }
+        return j;
+    }
+};
+----------------------------------------------------------------------------------
+27. Remove Element (C++)
+
+class Solution {
+public:
+    int removeElement(vector<int>& nums, int val) {
+        int index = 0;
+        for(int i = 0; i< nums.size(); i++){
+            if(nums[i] != val){
+                nums[index] = nums[i];
+                index++;
+            }
+        }
+        return index;
+    }
+};
+----------------------------------------------------------------------------------
+28. Find the Index of the First Occurrence in a String (Java)
+
+class Solution {
+    public int strStr(String haystack, String needle) {
+        int haylength=haystack.length();
+        int needlelength=needle.length();
+        if(haylength<needlelength)
+            return -1;
+        for(int i=0;i<=haystack.length()-needle.length();i++){
+            int j=0;
+            while(j<needle.length() && haystack.charAt(i+j)==needle.charAt(j))
+                j++;
+            if(j==needle.length()){
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+----------------------------------------------------------------------------------
+29. Divide Two Integers (C++)
+
+class Solution {
+public:
+    int divide(int dividend, int divisor) {
+        if (dividend == INT_MIN && divisor == -1) {
+            return INT_MAX;
+        }
+        long dvd = labs(dividend), dvs = labs(divisor), ans = 0;
+        int sign = dividend > 0 ^ divisor > 0 ? -1 : 1;
+        while (dvd >= dvs) {
+            long temp = dvs, m = 1;
+            while (temp << 1 <= dvd) {
+                temp <<= 1;
+                m <<= 1;
+            }
+            dvd -= temp;
+            ans += m;
+        }
+        return sign * ans;
+    }
+};
+----------------------------------------------------------------------------------
+30. Substring with Concatenation of All Words (Java)
+
+class Solution {
+    public List<Integer> findSubstring(String s, String[] words) {
+        final Map<String, Integer> counts = new HashMap<>();
+        for (final String word : words) {
+            counts.put(word, counts.getOrDefault(word, 0) + 1);
+        }
+        final List<Integer> indexes = new ArrayList<>();
+        final int n = s.length(), num = words.length, len = words[0].length();
+        for (int i = 0; i < n - num * len + 1; i++) {
+            final Map<String, Integer> seen = new HashMap<>();
+            int j = 0;
+            while (j < num) {
+                final String word = s.substring(i + j * len, i + (j + 1) * len);
+                if (counts.containsKey(word)) {
+                    seen.put(word, seen.getOrDefault(word, 0) + 1);
+                    if (seen.get(word) > counts.getOrDefault(word, 0)) {
+                        break;
+                    }
+                } else {
+                    break;
+                }
+                j++;
+            }
+            if (j == num) {
+                indexes.add(i);
+            }
+        }
+        return indexes;
+    }
+}
+----------------------------------------------------------------------------------
+31. Next Permutation (C++)
+
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+    	int n = nums.size(), k, l;
+    	for (k = n - 2; k >= 0; k--) {
+            if (nums[k] < nums[k + 1]) {
+                break;
+            }
+        }
+    	if (k < 0) {
+    	    reverse(nums.begin(), nums.end());
+    	} else {
+    	    for (l = n - 1; l > k; l--) {
+                if (nums[l] > nums[k]) {
+                    break;
+                }
+            } 
+    	    swap(nums[k], nums[l]);
+    	    reverse(nums.begin() + k + 1, nums.end());
+        }
+    }
+}; 
+----------------------------------------------------------------------------------
+32. Longest Valid Parentheses (C++)
+
+class Solution {
+public:
+    int longestValidParentheses(string s) {
+        int n = s.length(), longest = 0;
+        stack<int> st;
+        for (int i = 0; i < n; i++) {
+            if (s[i] == '(') st.push(i);
+            else {
+                if (!st.empty()) {
+                    if (s[st.top()] == '(') st.pop();
+                    else st.push(i);
+                }
+                else st.push(i);
+            }
+        }
+        if (st.empty()) longest = n;
+        else {
+            int a = n, b = 0;
+            while (!st.empty()) {
+                b = st.top(); st.pop();
+                longest = max(longest, a-b-1);
+                a = b;
+            }
+            longest = max(longest, a);
+        }
+        return longest;
+    }
+};
+----------------------------------------------------------------------------------
+33. Search in Rotated Sorted Array (Python3)
+
+class Solution:
+    def search(self, nums: 'List[int]', target: int) -> int:
+        L, H = 0, len(nums)
+        while L < H:
+            M = (L+H) // 2
+            if target < nums[0] < nums[M]: # -inf
+                L = M+1
+            elif target >= nums[0] > nums[M]: # +inf
+                H = M
+            elif nums[M] < target:
+                L = M+1
+            elif nums[M] > target:
+                H = M
+            else:
+                return M
+        return -1
+----------------------------------------------------------------------------------
+34. Find First and Last Position of Element in Sorted Array (Java)
+
+public class Solution {
+	public int[] searchRange(int[] A, int target) {
+		int start = Solution.firstGreaterEqual(A, target);
+		if (start == A.length || A[start] != target) {
+			return new int[]{-1, -1};
+		}
+		return new int[]{start, Solution.firstGreaterEqual(A, target + 1) - 1};
+	}
+	private static int firstGreaterEqual(int[] A, int target) {
+		int low = 0, high = A.length;
+		while (low < high) {
+			int mid = low + ((high - low) >> 1);
+			//low <= mid < high
+			if (A[mid] < target) {
+				low = mid + 1;
+			} else {
+				high = mid;
+			}
+		}
+		return low;
+	}
+}
+----------------------------------------------------------------------------------
+35. Search Insert Position (Java)
+
+class Solution {
+    public int searchInsert(int[] nums, int target) {
+        int start = 0;
+        int end = nums.length-1;
+
+        while (start <= end) {
+            int mid = start + (end-start)/2;
+            if (nums[mid] == target) return mid;
+            else if (nums[mid] > target) end = mid-1;
+            else start = mid+1;
+        }
+
+        return start;
+    }
+}
+----------------------------------------------------------------------------------
+36. Valid Sudoku (C++)
+
+class Solution
+{
+public:
+    bool isValidSudoku(vector<vector<char> > &board)
+    {
+        int used1[9][9] = {0}, used2[9][9] = {0}, used3[9][9] = {0};
+        
+        for(int i = 0; i < board.size(); ++ i)
+            for(int j = 0; j < board[i].size(); ++ j)
+                if(board[i][j] != '.')
+                {
+                    int num = board[i][j] - '0' - 1, k = i / 3 * 3 + j / 3;
+                    if(used1[i][num] || used2[j][num] || used3[k][num])
+                        return false;
+                    used1[i][num] = used2[j][num] = used3[k][num] = 1;
+                }
+        
+        return true;
+    }
+};
+----------------------------------------------------------------------------------
+1-21
+----------------------------------------------------------------------------------
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         for i in range(len(nums)):
