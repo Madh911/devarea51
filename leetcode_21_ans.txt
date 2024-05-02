@@ -1,21 +1,6 @@
 
 
-    calculated using basic arithemetic.
-    """
-    
-    heading = "Calculate P(ill | positive) without Bayes' Theorem"
-    print(heading)
-    print("=" * len(heading) + "\n")
-    
-    percent_ill = P_ill * 100
-    number_ill = population * P_ill
-    number_healthy = population * (1 - P_ill)
-    ill_positive = number_ill *  P_positive_if_ill
-    healthy_positive = number_healthy * (1 - P_negative_if_healthy)
-    P_ill_if_positive = ill_positive / (ill_positive + healthy_positive)
-                
-    print(f"Population:               {population}")
-    print(f"Percent ill:              {percent_ill}%")
+   
     print(f"Number ill:               {number_ill:>.0f}")
     print(f"Number healthy:           {number_healthy:>.0f}")
     print(f"P(postive if ill):        { P_positive_if_ill}")
