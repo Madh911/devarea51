@@ -1,24 +1,5 @@
 
-def main():
-    
-    population = 1000000
-    
-    # These 3 variables are for the known probabilites.
-    # Change them to see the effect on P(ill|positive)
-    P_ill = 0.01
-    P_positive_if_ill = 0.99 # sensitivity
-    P_negative_if_healthy = 0.099 # specificity
-    
-    calculate_without_bayes(population, P_ill, P_positive_if_ill, P_negative_if_healthy)
-    
-    print()
-    
-    calculate_with_bayes(P_ill, P_positive_if_ill, P_negative_if_healthy)
-    
-def calculate_without_bayes(population, P_ill, P_positive_if_ill, P_negative_if_healthy):
-    """
-    Calculate P(ill | positive) without Bayes' formula.
-    This is more laborious but shows how the result is
+
     calculated using basic arithemetic.
     """
     
