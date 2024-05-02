@@ -1,23 +1,6 @@
 
 
-   
-    print(f"Number ill:               {number_ill:>.0f}")
-    print(f"Number healthy:           {number_healthy:>.0f}")
-    print(f"P(postive if ill):        { P_positive_if_ill}")
-    print(f"P(negative if healthy):   {P_negative_if_healthy}")
-    print(f"Ill and test postive:     {ill_positive:>.0f}")
-    print(f"Healthy but test postive: {healthy_positive:>.0f}")
-    print(f"P(ill | positive):       {P_ill_if_positive:>.2f}")
-    
-def calculate_with_bayes(P_ill, P_positive_if_ill, P_negative_if_healthy):
-    """
-    Calculate P(ill | postive) with Bayes' Theorem.
-    """
-    
-    P_healthy = 1 - P_ill
-    P_positive_if_healthy = 1 - P_negative_if_healthy
-    P_ill_if_positive = (P_positive_if_ill * P_ill) / ((P_healthy * P_positive_if_healthy) + (P_ill * P_positive_if_ill))
-    
+ 
     heading = "Calculate P(ill | positive) with Bayes' Theorem"
     print(heading)
     print("=" * len(heading) + "\n")
