@@ -1,10 +1,6 @@
 
 
-    
-    print("                                      P(postive if ill) * P(ill)")
-    print("P(ill | postive) = -----------------------------------------------------------------")
-    print("                     P(healthy) * P(postive if healthy) + P(ill) * P(postive if ill)")
-    
+
     print("\n")
     
     print(f"                                             { P_positive_if_ill} * {P_ill}")
