@@ -1,8 +1,5 @@
 
 
-    print(heading)
-    print("=" * len(heading) + "\n")
-    
     
     print("                                      P(postive if ill) * P(ill)")
     print("P(ill | postive) = -----------------------------------------------------------------")
