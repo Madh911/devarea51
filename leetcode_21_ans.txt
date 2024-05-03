@@ -1,7 +1,5 @@
 
 
- 
-    heading = "Calculate P(ill | positive) with Bayes' Theorem"
     print(heading)
     print("=" * len(heading) + "\n")
     
