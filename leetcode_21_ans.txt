@@ -5,10 +5,6 @@
     print(heading)
     print("=" * len(heading) + "\n")
     
-    print(f"P(ill):                {P_ill}")
-    print(f"P(healthy):            {P_healthy}")
-    print(f"P(postive if ill):     { P_positive_if_ill}")
-    print(f"P(postive if healthy): {P_positive_if_healthy:>.2f}\n")
     
     print("                                      P(postive if ill) * P(ill)")
     print("P(ill | postive) = -----------------------------------------------------------------")
