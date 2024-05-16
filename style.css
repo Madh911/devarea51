@@ -20,7 +20,7 @@ a {
     background-color: #f44336;
     color: white;
     text-decoration: none;
-    border-radius: 5px; /* Optional: Rounded corners */
+    border-radius: 5px; 
 }
 a:hover {
     background-color: red; 
