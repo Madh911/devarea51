@@ -1,42 +1,5 @@
 
-
-
-
-
------------------------------------------------------------------
-
-
-
-#include<stdio.h>
-
-#include<conio.h>
-
-int main()
-
-int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-
-int sum = 0;
-
-int i;
-
-int length = sizeof(arr)/sizeof(arr[0]);
-
-clrscr();
-
-for (i = 0; i < length; i++) {
-
-sum = sum + arr[i];
-
-}
-
-printf("\nSum of all the elements of an array: %d", sum);
-return sum;
-
-}
-
-
-
-----------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
 22. Generate Parentheses (Java)
 
 class Solution {
