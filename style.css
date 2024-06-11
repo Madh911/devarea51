@@ -26,3 +26,8 @@ a {
 a:hover {
     background-color: red; 
 }
+
+.pdf-container {
+            margin: 30px; 
+}
+    
