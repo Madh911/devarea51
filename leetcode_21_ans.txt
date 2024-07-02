@@ -1,5 +1,5 @@
 
-------------------------------------
+---------------------------------------------------
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         for i in range(len(nums)):
@@ -8,7 +8,7 @@ class Solution:
                     return [i, j]
 
 1 py3 ↑
-------------------------------------
+---------------------------------------------------
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
